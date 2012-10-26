@@ -25,14 +25,8 @@ package
 		
 		protected function doInitialize():void
 		{
-			if(stage)
-			{
-				initialize()
-			}
-			else
-			{
-				addEventListener(Event.ADDED_TO_STAGE,initialize);
-			}
+			if(stage)	initialize()
+			else 	addEventListener(Event.ADDED_TO_STAGE,initialize);
 		}
 		
 		protected function initialize(e:Event = null):void
