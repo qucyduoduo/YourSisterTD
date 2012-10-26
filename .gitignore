@@ -9,3 +9,5 @@ bin-release/
 .project
 /_Lib_GreensockTween/bin
 /_Lib_Minimalcomps/bin
+/_Lib_Common/bin
+/_Lib_PureMVC/bin
