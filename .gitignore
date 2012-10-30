@@ -1,12 +1,10 @@
 # Build and Release Folders
+bin/
 bin-debug/
 bin-release/
+html-template/
 
 # Project property files
-.actionScriptProperties
-.flexProperties
-.settings/
-.project
 /_Lib_GreensockTween/bin
 /_Lib_Minimalcomps/bin
 /_Lib_Common/bin
