@@ -1,6 +1,7 @@
 package
 {
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.EnterFrameEvent;
@@ -32,6 +33,9 @@ package
 			stage.color = 0;
 			
 			Starling.current.showStats = true;
+			var stats:DisplayObject = Starling.current.stage.getChildAt(stage.numChildren-1);
+			stats.y = 50;
+
 			Starling.current.antiAliasing = 0;
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownEventHandle);
