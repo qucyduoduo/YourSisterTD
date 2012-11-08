@@ -4,6 +4,7 @@
     <classEntry path="interfaces.IUnitModel"/>
     <classEntry path="interfaces.IMapModel"/>
     <classEntry path="nostarling.BitmapMovieClip"/>
+    <classEntry path="utils.Counter"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
