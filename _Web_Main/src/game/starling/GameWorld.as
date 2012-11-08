@@ -1,8 +1,7 @@
-package
+package game.starling
 {
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.EnterFrameEvent;
 	import starling.events.Event;
@@ -73,7 +72,7 @@ package
 		
 		private function onKeyDownEventHandle(e:KeyboardEvent):void
 		{
-			
+			trace("onKeyDownEventHandle:", e.keyCode);
 		}
 	}
 }
