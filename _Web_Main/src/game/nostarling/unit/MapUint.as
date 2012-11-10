@@ -2,7 +2,7 @@ package game.nostarling.unit
 {
 	import flash.display.MovieClip;
 	
-	import nostarling.BitmapMovieClip;
+	import common.nostarling.BitmapMovieClip;
 	
 	public class MapUint extends BitmapMovieClip
 	{

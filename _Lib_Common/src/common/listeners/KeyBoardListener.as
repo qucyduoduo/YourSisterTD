@@ -1,7 +1,6 @@
 package common.listeners
 {
 	import common.base.listeners.BaseListener;
-	import common.managers.MainMgr;
 	import common.utils.MgrObjects;
 	
 	import flash.events.KeyboardEvent;
@@ -49,7 +48,7 @@ package common.listeners
 		
 		private function onKeyHandler(e:KeyboardEvent):void
 		{
-			MainMgr.instance.debugTrace(  "[KeyBoardListener] onKeyHandler type = " + e.type + " keyCode = " +  e.keyCode  );
+//			MainMgr.instance.debugTrace(  "[KeyBoardListener] onKeyHandler type = " + e.type + " keyCode = " +  e.keyCode  );
 			MgrObjects.eventMgr.dispatchEvent(e);
 		}
 		/**

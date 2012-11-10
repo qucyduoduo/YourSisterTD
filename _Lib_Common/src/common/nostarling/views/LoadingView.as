@@ -1,4 +1,4 @@
-package views
+package common.nostarling.views
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;

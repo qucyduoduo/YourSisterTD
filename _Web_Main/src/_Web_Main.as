@@ -1,10 +1,22 @@
 package
 {
+	import common.managers.EventMgr;
+	import common.managers.MainMgr;
+	import common.managers.MgrType;
+	import common.managers.ScriptMgr;
+	import common.managers.UIMgr;
+	import common.nostarling.managers.DisplayMgr;
+	import common.nostarling.managers.LayerMgr;
+	import common.starling.managers.Display3DMgr;
+	import common.starling.managers.Layer3DMgr;
+	import common.utils.TextTool;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.text.TextFormat;
 	import flash.utils.setTimeout;
 	
 	import game.nostarling.GameWorld;
@@ -36,6 +48,13 @@ package
 		
 		protected function initialize(e:Event = null):void
 		{
+			addManagers();
+			
+			MainMgr.instance.init(this, true );
+			
+			onInit();
+			
+			_isStarling = true;
 			//use different display mode
 			if( _isStarling )
 			{
@@ -47,6 +66,31 @@ package
 			{
 				new game.nostarling.GameWorld(stage);
 			}
+		}
+		
+		/**
+		 * add global managers
+		 */		
+		private function addManagers():void
+		{
+			MainMgr.instance.addMgr( MgrType.EVENT_MGR , new EventMgr() );
+			MainMgr.instance.addMgr( MgrType.SCRIPT_MGR , new ScriptMgr() );
+			MainMgr.instance.addMgr( MgrType.UI_MGR , new UIMgr() );
+			MainMgr.instance.addMgr( MgrType.DISPLAY_MGR , new DisplayMgr() );
+			MainMgr.instance.addMgr( MgrType.LAYER_MGR , new LayerMgr() );
+			MainMgr.instance.addMgr( MgrType.DISPLAY3D_MGR , new Display3DMgr() );
+			MainMgr.instance.addMgr( MgrType.LAYER3D_MGR , new Layer3DMgr() );
+		}
+		
+		private function onInit():void
+		{
+			var tf:TextFormat = new TextFormat("宋体",14, 0xffffff);
+			TextTool.addTextField(stage, "x=      y=", tf, null, 0 ,450,450);
+			TextTool.addTextField(stage, "", tf, null, 0, 470, 450);
+			TextTool.addTextField(stage, "", tf, null, 0, 490, 350);
+			TextTool.addTextField(stage, "", tf, null, 0, 510, 350);
+			TextTool.addTextField(stage, "v1.0.0操作说明：W上S下A左D右 J攻击", tf, null, 0, 430, 350);			
+			TextTool.addTextField(stage, " ", tf, null, 0, 550, 350);			
 		}
 	}
 }

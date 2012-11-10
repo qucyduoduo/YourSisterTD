@@ -3,6 +3,7 @@ package common.base.managers
 	import common.base.interfaces.IMgr;
 	
 	import flash.events.EventDispatcher;
+	import flash.utils.getQualifiedClassName;
 
 	public class BaseMgr extends EventDispatcher
 	{
@@ -46,6 +47,11 @@ package common.base.managers
 		 * 当前的服务集合中的服务列表
 		 */        
 		protected var _currentMgrSet: Vector.<IMgr>;
+
+		/**
+		 * 测试模式 
+		 */		
+		protected var _debugMode:Boolean = true;
 		
 		/**
 		 * 构造 
@@ -156,6 +162,34 @@ package common.base.managers
 		public function get currentMgrSetName():String
 		{
 			return _currentMgrSetName;
+		}
+		
+		/**
+		 * 测试模式输出
+		 * @param str
+		 */		
+		public function debugTrace(str:String):void 
+		{
+			if( getDebugMode )
+			{
+				trace( str );
+			}
+		}
+		/**
+		 * 
+		 */		
+		public function classTrace( methodStr:String, cls:Object):void
+		{
+			var className:String = getQualifiedClassName( cls );
+			debugTrace(  "[" + methodStr + "]" + className + "" );
+		}
+		/**
+		 * 获取是否测试模式
+		 * @return 
+		 */		
+		public function get getDebugMode():Boolean 
+		{
+			return _debugMode;
 		}
 	}
 }

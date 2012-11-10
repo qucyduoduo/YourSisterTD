@@ -32,6 +32,7 @@
       <libraryPathEntry kind="3" linkType="1" path="/_Lib_Common/bin/_Lib_Common.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/_Lib_GreensockTween/bin/_Lib_GreensockTween.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/_Lib_Minimalcomps/bin/_Lib_Minimalcomps.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="1" linkType="1" path="E:/NoahGitHub/YourSisterTD/RpgModel/libs"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

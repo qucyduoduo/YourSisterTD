@@ -46,7 +46,6 @@
     <classEntry path="common.listeners.MouseListener"/>
     <classEntry path="common.managers.EventMgr"/>
     <classEntry path="common.nostarling.managers.LayerMgr"/>
-    <classEntry path="common.managers.MainMgr"/>
     <classEntry path="common.managers.ScriptMgr"/>
     <classEntry path="common.managers.UIMgr"/>
     <classEntry path="common.models.AlertModel"/>
@@ -58,10 +57,10 @@
     <classEntry path="common.utils.GeomUtil"/>
     <classEntry path="common.utils.KeyPoll"/>
     <classEntry path="common.utils.Utils"/>
-    <classEntry path="views.LoadingView"/>
+    <classEntry path="common.nostarling.views.LoadingView"/>
     <classEntry path="common.base.interfaces.IMgr"/>
     <classEntry path="common.managers.MgrType"/>
-    <classEntry path="common.utils.MgrObjects"/>
+    <classEntry path="common.utils.TextTool"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

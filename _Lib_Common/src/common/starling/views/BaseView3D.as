@@ -1,7 +1,6 @@
 package common.starling.views
 {
 	import common.base.interfaces.IView;
-	import common.managers.MainMgr;
 	
 	import starling.display.Sprite;
 	
@@ -21,39 +20,39 @@ package common.starling.views
 		/**
 		 * 设置视图
 		 */		
-		public function setup():void{
-			MainMgr.instance.classTrace( "setup", this );
+		public function setup():void
+		{
 		}
 		/**
 		 * 填充数据到视图
 		 * @param data
 		 */		
-		public function init(data:Object=null):void{
-			MainMgr.instance.classTrace( "init", this );
+		public function init(data:Object=null):void
+		{
 		}
 		/**
 		 * 显示视图
 		 */		
-		public function show():void{
-			MainMgr.instance.classTrace( "show", this );
+		public function show():void
+		{
 		}
 		/**
 		 * 更新视图
 		 */		
-		public function update():void{
-			MainMgr.instance.classTrace( "update", this );
+		public function update():void
+		{
 		}
 		/**
 		 * 隐藏视图
 		 */		
-		public function hide():void{
-			MainMgr.instance.classTrace( "hide", this );
+		public function hide():void
+		{
 		}
 		/**
 		 * 销毁视图
 		 */		
-		public function destroy():void{
-			MainMgr.instance.classTrace( "destroy", this );
+		public function destroy():void
+		{
 		}
 	}
 }

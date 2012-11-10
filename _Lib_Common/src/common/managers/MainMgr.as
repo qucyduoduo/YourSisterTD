@@ -6,7 +6,6 @@ package common.managers
 	
 	import flash.display.Loader;
 	import flash.display.Sprite;
-	import flash.utils.getQualifiedClassName;
 	
 	import starling.core.Starling;
 	import starling.display.Quad;
@@ -29,10 +28,6 @@ package common.managers
 			}
 			return _instance;
 		}
-		/**
-		 * 测试模式 
-		 */		
-		private var _debugMode:Boolean = true;
 		/**
 		 * 构造函数
 		 */		
@@ -112,34 +107,6 @@ package common.managers
 			//战斗
 			//怪物
 			
-		}
-
-		/**
-		 * 测试模式输出
-		 * @param str
-		 */		
-		public function debugTrace(str:String):void 
-		{
-			if( getDebugMode )
-			{
-				trace( str );
-			}
-		}
-		/**
-		 * 
-		 */		
-		public function classTrace( methodStr:String, cls:Object):void
-		{
-			var className:String = getQualifiedClassName( cls );
-			debugTrace(  "[" + methodStr + "]" + className + "" );
-		}
-		/**
-		 * 获取是否测试模式
-		 * @return 
-		 */		
-		public function get getDebugMode():Boolean 
-		{
-			return _debugMode;
 		}
 	}
 }

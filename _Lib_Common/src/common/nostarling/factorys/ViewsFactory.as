@@ -7,7 +7,7 @@ package common.nostarling.factorys
 	import common.nostarling.views.BtnView;
 	import common.types.ViewType;
 	
-	import views.LoadingView;
+	import common.nostarling.views.LoadingView;
 
 	/**
 	 * 视图工厂类

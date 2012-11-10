@@ -1,7 +1,6 @@
 package common.base.views
 {
 	import common.base.interfaces.IView;
-	import common.managers.MainMgr;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -26,7 +25,6 @@ package common.base.views
 		 */		
 		public function setup():void
 		{
-			MainMgr.instance.classTrace( "setup", this );
 		}
 		/**
 		 * 填充数据到视图
@@ -34,28 +32,24 @@ package common.base.views
 		 */		
 		public function init(data:Object=null):void
 		{
-			MainMgr.instance.classTrace( "init", this );
 		}
 		/**
 		 * 显示视图
 		 */		
 		public function show():void
 		{
-			MainMgr.instance.classTrace( "show", this );
 		}
 		/**
 		 * 隐藏视图
 		 */		
 		public function hide():void
 		{
-			MainMgr.instance.classTrace( "hide", this );
 		}
 		/**
 		 * 销毁视图
 		 */		
 		public function destroy():void
 		{
-			MainMgr.instance.classTrace( "destroy", this );
 		}
 		/**
 		 * 
@@ -63,7 +57,6 @@ package common.base.views
 		 */		
 		protected function onClickHandler(e:MouseEvent):void
 		{
-			MainMgr.instance.classTrace( "onClickHandler", this );
 		}
 	}
 }

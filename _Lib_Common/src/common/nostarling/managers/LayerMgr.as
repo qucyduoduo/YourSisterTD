@@ -1,11 +1,10 @@
 package common.nostarling.managers
 {
 	import common.base.interfaces.IMgr;
-	import common.managers.MainMgr;
-	import common.managers.MgrType;
 	import common.nostarling.layers.Layer;
 	import common.nostarling.layers.LayerAvg;
 	import common.nostarling.layers.LayerRpg;
+	import common.utils.MgrObjects;
 	
 	import flash.display.Sprite;
 
@@ -68,7 +67,7 @@ package common.nostarling.managers
 					sp.cacheAsBitmap = true;
 				}
 				layer.push(sp);
-				(MainMgr.instance.getMgr( MgrType.DISPLAY_MGR ) as DisplayMgr).getStage.addChild(sp);
+				MgrObjects.displayMgr.getStage.addChild(sp);
 				//MainMgr.debugTrace( "[LayerMgr] 创建基本层: " + layerID);
 			}
 			sp = null;
