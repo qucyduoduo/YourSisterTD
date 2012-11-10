@@ -170,14 +170,12 @@ package starling.textures
             
             var atfData:AtfData = new AtfData(data);
             var nativeTexture:flash.display3D.textures.Texture = context.createTexture(
-                    atfData.width, atfData.height, atfData.format, true);
+                    atfData.width, atfData.height, atfData.format, false);
             
             uploadAtfData(nativeTexture, data);
             
-//            var concreteTexture:ConcreteTexture = new ConcreteTexture(nativeTexture, atfData.format, 
-//                atfData.width, atfData.height, atfData.numTextures > 1, false, true, scale);
             var concreteTexture:ConcreteTexture = new ConcreteTexture(nativeTexture, atfData.format, 
-                atfData.width, atfData.height, false, false, true, scale);
+                atfData.width, atfData.height, atfData.numTextures > 1, false, false, scale);
             
             if (Starling.handleLostContext) 
                 concreteTexture.restoreOnLostContext(atfData);
@@ -294,7 +292,7 @@ package starling.textures
         internal static function uploadAtfData(nativeTexture:flash.display3D.textures.Texture, 
                                                data:ByteArray, offset:int=0):void
         {
-            nativeTexture.uploadCompressedTextureFromByteArray(data, offset, true);
+            nativeTexture.uploadCompressedTextureFromByteArray(data, offset);
         }
         
         // properties

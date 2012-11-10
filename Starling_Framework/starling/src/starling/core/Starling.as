@@ -153,6 +153,7 @@ package starling.core
         private var mStage3D:Stage3D;
         private var mStage:Stage; // starling.display.stage!
         private var mRootClass:Class;
+        private var mRoot:DisplayObject;
         private var mJuggler:Juggler;
         private var mStarted:Boolean;        
         private var mSupport:RenderSupport;
@@ -161,16 +162,19 @@ package starling.core
         private var mSimulateMultitouch:Boolean;
         private var mEnableErrorChecking:Boolean;
         private var mLastFrameTimestamp:Number;
-        private var mViewPort:Rectangle;
         private var mLeftMouseDown:Boolean;
         private var mStatsDisplay:StatsDisplay;
         private var mShareContext:Boolean;
+        
+        private var mViewPort:Rectangle;
+        private var mViewPortClipped:Rectangle;
         
         private var mNativeStage:flash.display.Stage;
         private var mNativeOverlay:flash.display.Sprite;
         
         private var mContext:Context3D;
         private var mPrograms:Dictionary;
+        private var mCustomData:Dictionary;
         
         private static var sCurrent:Starling;
         private static var sHandleLostContext:Boolean;
@@ -215,6 +219,7 @@ package starling.core
             mEnableErrorChecking = false;
             mLastFrameTimestamp = getTimer() / 1000.0;
             mPrograms = new Dictionary();
+            mCustomData = new Dictionary();
             mSupport  = new RenderSupport();
             
             // register touch/mouse event handlers            
@@ -309,15 +314,16 @@ package starling.core
             dispatchEventWith(starling.events.Event.CONTEXT3D_CREATE, false, mContext);
         }
         
-        protected function initializeRoot():void
+        private function initializeRoot():void
         {
-            if (mStage.numChildren > 0) return;
+            if (mRoot == null)
+            {
+                mRoot = new mRootClass() as DisplayObject;
+                if (mRoot == null) throw new Error("Invalid root class: " + mRootClass);
+                mStage.addChildAt(mRoot, 0);
             
-            var rootObject:DisplayObject = new mRootClass();
-            if (rootObject == null) throw new Error("Invalid root class: " + mRootClass);
-            mStage.addChildAt(rootObject, 0);
-            
-            dispatchEventWith(starling.events.Event.ROOT_CREATED, false, root);
+                dispatchEventWith(starling.events.Event.ROOT_CREATED, false, mRoot);
+            }
         }
         
         /** Calls <code>advanceTime()</code> (with the time that has passed since the last frame)
@@ -357,11 +363,18 @@ package starling.core
             if (!mShareContext)
                 RenderSupport.clear(mStage.color, 1.0);
             
+            var scaleX:Number = mViewPort.width  / mStage.stageWidth;
+            var scaleY:Number = mViewPort.height / mStage.stageHeight;
+            
             mContext.setDepthTest(false, Context3DCompareMode.ALWAYS);
             mContext.setCulling(Context3DTriangleFace.NONE);
             
-            mSupport.setOrthographicProjection(0, 0, mStage.stageWidth, mStage.stageHeight);
             mSupport.renderTarget = null; // back buffer
+            mSupport.setOrthographicProjection(
+                mViewPort.x < 0 ? -mViewPort.x / scaleX : 0.0, 
+                mViewPort.y < 0 ? -mViewPort.y / scaleY : 0.0,
+                mViewPortClipped.width  / scaleX, 
+                mViewPortClipped.height / scaleY);
             
             mStage.render(mSupport, 1.0);
             mSupport.finishQuadBatch();
@@ -375,13 +388,21 @@ package starling.core
         
         private function updateViewPort():void
         {
+            // Constrained mode requires that the viewport is within the native stage bounds;
+            // thus, we use a clipped viewport when configuring the back buffer. (In baseline
+            // mode, that's not necessary, but it does not hurt either.)
+            
+            mViewPortClipped = mViewPort.intersection(
+                new Rectangle(0, 0, mNativeStage.stageWidth, mNativeStage.stageHeight));
+            
             if (mShareContext) return;
             
             if (mContext && mContext.driverInfo != "Disposed")
-                mContext.configureBackBuffer(mViewPort.width, mViewPort.height, mAntiAliasing, false);
+                mContext.configureBackBuffer(
+                    mViewPortClipped.width, mViewPortClipped.height, mAntiAliasing, false);
             
-            mStage3D.x = mViewPort.x;
-            mStage3D.y = mViewPort.y;
+            mStage3D.x = mViewPortClipped.x;
+            mStage3D.y = mViewPortClipped.y;
         }
 
         private function updateNativeOverlay():void
@@ -479,7 +500,7 @@ package starling.core
             mStage.dispatchEvent(new ResizeEvent(Event.RESIZE, stage.stageWidth, stage.stageHeight));
         }
 
-        protected function onTouch(event:Event):void
+        private function onTouch(event:Event):void
         {
             if (!mStarted) return;
             
@@ -487,6 +508,9 @@ package starling.core
             var globalY:Number;
             var touchID:int;
             var phase:String;
+            var pressure:Number = 1.0;
+            var width:Number = 1.0;
+            var height:Number = 1.0;
             
             // figure out general touch properties
             if (event is MouseEvent)
@@ -508,6 +532,9 @@ package starling.core
                 globalX = touchEvent.stageX;
                 globalY = touchEvent.stageY;
                 touchID = touchEvent.touchPointID;
+                pressure = touchEvent.pressure;
+                width = touchEvent.sizeX;
+                height = touchEvent.sizeY;
             }
             
             // figure out touch phase
@@ -527,7 +554,7 @@ package starling.core
             globalY = mStage.stageHeight * (globalY - mViewPort.y) / mViewPort.height;
             
             // enqueue touch in touch processor
-            mTouchProcessor.enqueue(touchID, phase, globalX, globalY);
+            mTouchProcessor.enqueue(touchID, phase, globalX, globalY, pressure, width, height);
         }
         
         private function get touchEventTypes():Array
@@ -703,8 +730,13 @@ package starling.core
          *  the event 'ROOT_CREATED' has been dispatched. */
         public function get root():DisplayObject
         {
-            return mStage.getChildAt(0);
+            return mRoot;
         }
+        
+        /** A dictionary that can be used to save custom data within this Starling instance. 
+         *  If you need to share data that is bound to a specific Starling instance
+         *  (e.g. textures), use this dictionary instead of creating a static class variable. */ 
+        public function get customData():Dictionary { return mCustomData; }
         
         /** Indicates if the Context3D render calls are managed externally to Starling, 
          *  to allow other frameworks to share the Stage3D instance. @default false */
