@@ -1,23 +1,23 @@
-package game.starling.view
+package game.core.unit.starling
 {
-	import common.base.views.starling.BaseView;
+	import common.utils.QuadNode;
+	import common.utils.QuadTrees;
 	
 	import flash.events.Event;
 	
 	import game.base.controllers.ObjectController;
+	import game.base.models.ObjectModel;
+	import game.base.starling.GameUint;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IObjectController;
 	import game.core.interfaces.IObjectModel;
 	import game.core.interfaces.IObjectView;
-	import game.base.models.ObjectModel;
-	import game.untils.QuadNode;
-	import game.untils.QuadTrees;
 
 	/**
 	 * 物体视图
 	 * @author noah
 	 */	
-	public class ObjectView extends BaseView implements IObjectView
+	public class Map3DUnit extends GameUint implements IObjectView
 	{
 		/**
 		 * 模型 
@@ -37,16 +37,18 @@ package game.starling.view
 		protected var _tree:QuadTrees;
 		/**
 		 * 构造函数
-		 */		
-		public function ObjectView()
+		 */
+		public function Map3DUnit()
 		{
 			super();
 		}
+		
 		/**
 		 * 初始化
 		 * @param data
 		 */		
-		override public function init(data:Object = null):void{
+		override public function init(data:Object = null):void
+		{
 			_model = new ObjectModel();
 			_controller = new ObjectController();
 			_controller.init( _model );
@@ -55,7 +57,8 @@ package game.starling.view
 		/**
 		 * 更新视图
 		 */		
-		override public function update():void{
+		override public function update():void
+		{
 			//更新视图坐标`
 			super.x = model.posX;
 			super.y = model.posY;
@@ -104,7 +107,7 @@ package game.starling.view
 		public function get model():*{
 			return _model;
 		}
-
+		
 		override public function set x(value:Number):void{
 			super.x = value;
 		}
@@ -135,6 +138,6 @@ package game.starling.view
 				this._node = null;
 			}
 			this._tree = null;
-		}	
+		}
 	}
 }

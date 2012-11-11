@@ -1,17 +1,18 @@
-package game.starling.view
+package game.core.map.starling
 {
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
-	import game.core.statics.TileBlockController;
 	import game.core.events.ModelEvent;
 	import game.core.models.statics.MapModel;
 	import game.core.models.statics.TileBlockModel;
+	import game.core.statics.TileBlockController;
+	import game.core.unit.starling.Map3DUnit;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
-	public class TileBlockView3D extends ObjectView
+	public class TileBlock3D extends Map3DUnit
 	{
 		private var _model:TileBlockModel;
 		private var _controller:TileBlockController;
@@ -20,7 +21,7 @@ package game.starling.view
 			return _model;
 		}
 		
-		public function TileBlockView3D()
+		public function TileBlock3D()
 		{
 		}
 		

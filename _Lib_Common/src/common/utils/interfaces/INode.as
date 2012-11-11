@@ -1,5 +1,8 @@
-package game.untils
+package common.utils.interfaces
 {
+	import common.utils.QuadNode;
+	import common.utils.QuadTrees;
+
 	/**
 	 * 四叉树节点接口
 	 */	

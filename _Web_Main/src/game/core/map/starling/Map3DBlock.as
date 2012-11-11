@@ -1,21 +1,22 @@
-package game.starling.view
+package game.core.map.starling
 {
+	import game.base.starling.GameUint;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
-	import game.core.statics.BlockController;
 	import game.core.events.ModelEvent;
 	import game.core.models.statics.BlockModel;
 	import game.core.models.statics.MapModel;
+	import game.core.statics.BlockController;
+	import game.core.unit.starling.StaticMap3DUnit;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
-	
 	/**
 	 * 2D地图格子视图
 	 * @author noah
 	 */	
-	public class BlockView3D extends StaticObjectView3D
+	public class Map3DBlock extends StaticMap3DUnit
 	{
 		private var _model:BlockModel;
 		private var _controller:BlockController;
@@ -33,18 +34,20 @@ package game.starling.view
 		 * @param num
 		 * @param _x
 		 * @param _y
-		 */		
-		public function BlockView3D() {
-		
+		 */	
+		public function Map3DBlock()
+		{
+			super();
 		}
-		override public function init( data:Object = null):void {
-			
+		
+		override public function init( data:Object = null):void 
+		{
 			_model = new BlockModel();
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
 			_controller = new BlockController();
 			_controller.init(_model);
 			_model.num = data[0];
-
+			
 			var s:Sprite = new Sprite();
 			s.graphics.beginFill( _model.num > 0?0x000000:0xffffff );
 			s.graphics.lineStyle(1,0xcccccc)

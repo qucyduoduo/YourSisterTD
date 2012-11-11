@@ -1,8 +1,10 @@
-package game.untils
+package common.utils
 {
-	import flash.display.DisplayObject;
+	import common.utils.interfaces.INode;
+	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+
 	/**
 	 *  四叉树的节点
 	 */

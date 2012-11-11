@@ -1,37 +1,41 @@
-package game.starling.view
+package  game.core.unit.starling
 {
 	import flash.events.Event;
 	
+	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.PeopleController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IPeopleView;
-	import game.app.managers.TextureMgr;
 	import game.core.models.dynamics.PeopleModel;
 	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
-
+	
 	/**
 	 * 人物视图
 	 * @author noah
 	 */
-	public class PeopleView3D extends DynamicObjectView3D implements IPeopleView
+	public class Character3DUint extends DynamicMap3DUnit implements IPeopleView
 	{
 		private var _model:PeopleModel;
 		private var _controller:PeopleController;
 		
-		private function get controller():PeopleController{
+		private function get controller():PeopleController
+		{
 			return _controller;
 		}
-		override public function get model():*{
+		
+		override public function get model():*
+		{
 			return this._model;
 		}
-
-		public function PeopleView3D(){
-			
+		
+		public function Character3DUint()
+		{
+			super();
 		}
 		
 		protected function onAttackHandler(e:ActionEvent):void{

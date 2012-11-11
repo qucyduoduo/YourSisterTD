@@ -1,6 +1,6 @@
 package  game.core.interfaces
 {
-	import game.untils.QuadTrees;
+	import common.utils.QuadTrees;
 	
 	public interface IMapView
 	{

@@ -1,18 +1,18 @@
-package game.starling.view
+package game.core.unit.starling
 {
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.TileMonsterController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
-	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
 	import game.core.models.dynamics.TileMonsterModel;
 	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	
-	public class TileMonsterView3D extends MonsterView3D
+	public class TileEnemy3DUnit extends Enemy3DUnit
 	{
 		private var _model:TileMonsterModel;
 		private var _controller:TileMonsterController;
@@ -24,7 +24,7 @@ package game.starling.view
 		override public function get model():*{
 			return this._model;
 		}
-		public function TileMonsterView3D()
+		public function TileEnemy3DUnit()
 		{
 			super();
 		}

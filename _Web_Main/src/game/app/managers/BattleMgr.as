@@ -4,8 +4,8 @@ package game.app.managers
 	
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IPeopleModel;
-	import game.untils.INode;
-	import game.untils.QuadNode;
+	import common.utils.interfaces.INode;
+	import common.utils.QuadNode;
 	
 	import starling.events.Event;
 

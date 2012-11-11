@@ -14,8 +14,9 @@ package game.untils
 			
 		}
 		
-		private static function onMapJsonLoadCompleteHandler(e:Event):void{
-			mapJsonLoader.removeEventListener("complete", onMapJsonLoadCompleteHandler);
+		private static function onMapJsonLoadCompleteHandler(e:Event):void
+		{
+			mapJsonLoader.removeEventListener(Event.COMPLETE, onMapJsonLoadCompleteHandler);
 			
 			_callBack( JSON.parse(mapJsonLoader.data) );
 		}
@@ -24,7 +25,7 @@ package game.untils
 		{
 			_callBack = callBack;
 			mapJsonLoader = new URLLoader();
-			mapJsonLoader.addEventListener("complete", onMapJsonLoadCompleteHandler);
+			mapJsonLoader.addEventListener(Event.COMPLETE, onMapJsonLoadCompleteHandler);
 			mapJsonLoader.load(new URLRequest("data/map.json"));
 		}
 	}

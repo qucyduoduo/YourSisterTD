@@ -1,12 +1,12 @@
-package game.starling.view
+package game.core.unit.starling
 {
 	/**
 	 * 动态物体视图
 	 * @author noah
 	 */
-	public class DynamicObjectView3D extends StaticObjectView3D
+	public class DynamicMap3DUnit extends StaticMap3DUnit
 	{
-		public function DynamicObjectView3D()
+		public function DynamicMap3DUnit()
 		{
 			super();
 		}

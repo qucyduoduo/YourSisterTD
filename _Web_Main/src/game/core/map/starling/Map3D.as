@@ -1,25 +1,23 @@
-package game.starling.view
+package game.core.map.starling
 {
 	import common.base.views.starling.BaseView;
+	import common.utils.QuadNode;
+	import common.utils.QuadTrees;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import game.app.managers.Depth3DMgr;
+	import game.base.starling.GameUint;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
-	import game.app.managers.Depth3DMgr;
 	import game.core.models.statics.MapModel;
-	import game.untils.QuadNode;
-	import game.untils.QuadTrees;
 	
+	import starling.animation.IAnimatable;
 	import starling.display.Sprite;
-
-	/**
-	 * 2D地图视图
-	 * @author noah
-	 */	
-	public class MapView3D extends BaseView implements IMapView
+	
+	public class Map3D extends GameUint  implements IMapView, IAnimatable
 	{
 		protected var _objTree:QuadTrees;
 		/**
@@ -61,13 +59,15 @@ package game.starling.view
 		public function set objTree(value:QuadTrees):void{
 			this._objTree = value;
 		}
+		
 		/**
 		 * 构造函数
 		 * 创建模型
 		 * 创建四叉树
 		 * @param data
 		 */		
-		public function MapView3D() {
+		public function Map3D()
+		{
 			super();
 			_airLevel = new Sprite();
 			_contentLevel = new Sprite();
@@ -76,8 +76,14 @@ package game.starling.view
 			this.addChild(_contentLevel);
 			this.addChild(_airLevel);
 		}
-		override public function init( data:Object = null):void {
-			
+		
+		public function advanceTime(time:Number):void
+		{
+			//TODO: implement function
+		}
+		
+		override public function init( data:Object = null):void 
+		{
 			_model = new MapModel( data );
 			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 , 512));
 			var len:uint =  _model.dataArr.length;
@@ -95,7 +101,7 @@ package game.starling.view
 		 * @param _y
 		 */		
 		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
-			var block:BlockView3D = new BlockView3D();
+			var block:Map3DBlock = new Map3DBlock();
 			block.init([ num, _x, _y]);
 			if(num > 0){
 				_contentLevel.addChild( block );

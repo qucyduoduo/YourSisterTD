@@ -1,8 +1,8 @@
 package  game.core.interfaces
 {
-	import flash.events.Event;
+	import common.utils.interfaces.INode;
 	
-	import game.untils.INode;
+	import flash.events.Event;
 	
 	public interface IObjectView extends INode
 	{

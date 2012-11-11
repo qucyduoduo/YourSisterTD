@@ -57,8 +57,8 @@ package game.core.managers
 		/**
 		 * 
 		 */		
-		private function loadUI():void{
-			
+		public function loadUI():void
+		{
 			/*AlertController.show("你确定吗？",function():void{
 				MainMgr.debugTrace("[loadUI] true");
 			},function():void{

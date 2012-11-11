@@ -2,16 +2,16 @@ package game.starling
 {
 	import common.base.views.starling.BaseView;
 	
-	import game.core.interfaces.IMapView;
 	import game.app.managers.KeyBoardMgr;
 	import game.app.managers.TextureMgr;
-	import game.starling.view.MapView3D;
-	import game.starling.view.MonsterView3D;
-	import game.starling.view.PeopleView3D;
-	import game.starling.view.Tile25MapView3D;
-	import game.starling.view.TileMapView3D;
-	import game.starling.view.TileMonsterView3D;
-	import game.starling.view.TilePeopleView3D;
+	import game.core.interfaces.IMapView;
+	import game.core.map.starling.Map3D;
+	import game.core.unit.starling.Character3DUint;
+	import game.core.unit.starling.Enemy3DUnit;
+	import game.core.unit.starling.TileCharacter3DUnit;
+	import game.core.unit.starling.TileEnemy3DUnit;
+	import game.core.map.starling.Tile25Map3D;
+	import game.core.map.starling.TileMap3D;
 	import game.untils.MapLoader;
 	import game.untils.MgrObjects;
 	
@@ -27,10 +27,25 @@ package game.starling
 	
 	public class GameWorld extends Sprite
 	{
-		private var p:PeopleView3D;
-		private var monster:MonsterView3D;
+		/**
+		 * 
+		 */		
+		private var p:Character3DUint;
+		/**
+		 * 
+		 */		
+		private var monster:Enemy3DUnit;
+		/**
+		 * 
+		 */		
 		private var monsterArr:Array;
+		/**
+		 *  
+		 */		
 		private var map:IMapView;
+		/**
+		 * 
+		 */		
 		public static var GAME_MODE:uint;
 		
 		public function GameWorld()
@@ -68,7 +83,7 @@ package game.starling
 			MgrObjects.display3DMgr.init( this );
 			MgrObjects.layer3DMgr.init();
 			
-			//MainMgr.instance.loadUI();
+//			MainMgr.instance.loadUI();
 			//stage.addEventListener(TouchEvent.TOUCH, onTouch);
 			MapLoader.load( onMapJsonLoadCompleteHandler );
 		}
@@ -76,26 +91,34 @@ package game.starling
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
 			//1 平面 ，2斜角，3TIle斜角
-			GAME_MODE = 3;
+			GAME_MODE = 2;
 			
 			TextureMgr.instance.init();
 			
 			var strMapData:Object = str;
-			if(GAME_MODE == 1){
-				map = new MapView3D();
-			} else if(GAME_MODE == 2){
-				map = new TileMapView3D();
-			} else if(GAME_MODE == 3){
-				map = new Tile25MapView3D();
+			if(GAME_MODE == 1)
+			{
+				map = new Map3D();
+			}
+			else if(GAME_MODE == 2)
+			{
+				map = new TileMap3D();
+			} 
+			else if(GAME_MODE == 3)
+			{
+				map = new Tile25Map3D();
 			}
 			
 			stage.addChild( map as BaseView);
 			map.init( strMapData["mapdata"] );
 			
-			if(GAME_MODE == 1){
-				p = new PeopleView3D();
-			} else if(GAME_MODE == 2 || GAME_MODE == 3){
-				p = new TilePeopleView3D();
+			if(GAME_MODE == 1)
+			{
+				p = new Character3DUint();
+			}
+			else if(GAME_MODE == 2 || GAME_MODE == 3)
+			{
+				p = new TileCharacter3DUnit();
 			}
 			p.init( [1,8,5,4] );
 			p.draw();
@@ -103,12 +126,17 @@ package game.starling
 			
 			monsterArr = [];
 			
-			for(var i:uint=4;i<8;i++){
-				for(var j:uint=4;j<8;j++){
-					if(GAME_MODE == 1){
-						monster = new MonsterView3D();
-					} else if(GAME_MODE == 2 || GAME_MODE == 3){
-						monster = new TileMonsterView3D();
+			for(var i:uint=4;i<8;i++)
+			{
+				for(var j:uint=4;j<8;j++)
+				{
+					if(GAME_MODE == 1)
+					{
+						monster = new Enemy3DUnit();
+					}
+					else if(GAME_MODE == 2 || GAME_MODE == 3)
+					{
+						monster = new TileEnemy3DUnit();
 					}
 					monsterArr.push(monster);
 					monster.init( [3,j,i] );
@@ -128,11 +156,14 @@ package game.starling
 		 */			
 		private function onUpdateHandler(e:Event):void{
 			
-			if(p){
+			if(p)
+			{
 				p.onInputHandler( map );
 			}
-			for each(monster in monsterArr){
-				if(monster){
+			for each(monster in monsterArr)
+			{
+				if(monster)
+				{
 					monster.onInputHandler( map );
 				}
 			}

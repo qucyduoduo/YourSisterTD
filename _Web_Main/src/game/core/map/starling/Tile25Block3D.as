@@ -1,4 +1,4 @@
-package game.starling.view
+package game.core.map.starling
 {
 	import flash.display.BitmapData;
 	import flash.display.Shape;
@@ -12,7 +12,7 @@ package game.starling.view
 	import starling.display.Image;
 	import starling.textures.Texture;
 
-	public class Tile25BlockView3D extends TileBlockView3D
+	public class Tile25Block3D extends TileBlock3D
 	{
 		private var _model:Tile25BlockModel;
 		private var _controller:Tile25BlockController;
@@ -22,7 +22,7 @@ package game.starling.view
 			return _model;
 		}
 		
-		public function Tile25BlockView3D()
+		public function Tile25Block3D()
 		{
 		}
 		

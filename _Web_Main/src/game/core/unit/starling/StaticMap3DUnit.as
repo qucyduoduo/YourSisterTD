@@ -1,27 +1,28 @@
-package game.starling.view
+package game.core.unit.starling
 {
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.core.statics.StaticObjectController;
-	import game.core.events.ModelEvent;
-	import game.core.interfaces.IMapView;
 	import game.app.managers.Depth3DMgr;
 	import game.app.managers.TextureMgr;
+	import game.core.events.ModelEvent;
+	import game.core.interfaces.IMapView;
 	import game.core.models.statics.MapModel;
 	import game.core.models.statics.StaticObjectModel;
+	import game.core.statics.StaticObjectController;
+	import game.core.unit.starling.Map3DUnit;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.display.Quad;
-
+	
 	/**
 	 * 静态物体视图
 	 * @author noah
 	 */	
-	public class StaticObjectView3D extends ObjectView
+	public class StaticMap3DUnit extends Map3DUnit
 	{
 		private var _model:StaticObjectModel;
 		private var _controller:StaticObjectController;
@@ -44,7 +45,7 @@ package game.starling.view
 			return this._model;
 		}
 		
-		public function StaticObjectView3D()
+		public function StaticMap3DUnit()
 		{
 			super();
 		}

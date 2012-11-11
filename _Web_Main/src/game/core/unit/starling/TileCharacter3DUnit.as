@@ -1,18 +1,19 @@
-package game.starling.view
+package  game.core.unit.starling
 {
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.TilePeopleController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
-	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
+	import game.core.interfaces.IPeopleView;
 	import game.core.models.dynamics.TilePeopleModel;
 	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	
-	public class TilePeopleView3D extends PeopleView3D
+	public class TileCharacter3DUnit extends Character3DUint implements IPeopleView
 	{
 		private var _model:TilePeopleModel;
 		private var _controller:TilePeopleController;
@@ -27,11 +28,12 @@ package game.starling.view
 		 * 
 		 * @return 
 		 */		
-		override public function get model():* {
+		override public function get model():* 
+		{
 			return this._model;
 		}
 		
-		public function TilePeopleView3D() {
+		public function TileCharacter3DUnit() {
 			
 		}
 		/**

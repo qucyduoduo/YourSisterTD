@@ -1,10 +1,10 @@
-package game.untils
+package common.utils
 {
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import common.utils.HashMap;
+	import common.utils.interfaces.INode;
 
 	/**
 	 * 四叉树 

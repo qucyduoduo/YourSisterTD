@@ -1,17 +1,17 @@
-package game.starling.view
+package game.core.unit.starling
 {
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
 	import flashx.textLayout.formats.TextAlign;
 	
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
+	import game.base.models.ObjectModel;
 	import game.core.controllers.dynamics.MonsterController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
-	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
-	import game.base.models.ObjectModel;
 	import game.core.models.dynamics.MonsterModel;
 	import game.core.models.statics.MapModel;
 	
@@ -20,7 +20,7 @@ package game.starling.view
 	import starling.display.Quad;
 	import starling.textures.TextureAtlas;
 	
-	public class MonsterView3D extends ObjectView
+	public class Enemy3DUnit extends Map3DUnit
 	{
 		private var _model:MonsterModel;
 		private var _controller:MonsterController;
@@ -41,9 +41,9 @@ package game.starling.view
 			return this._model as ObjectModel;
 		}
 		
-		public function MonsterView3D()
+		public function Enemy3DUnit()
 		{
-			
+			super();
 		}
 		
 		protected function onAttackHandler(e:ActionEvent):void{
@@ -118,6 +118,5 @@ package game.starling.view
 				Depth3DMgr.swapDepth(this, model.posY);
 			}
 		}
-		
 	}
 }

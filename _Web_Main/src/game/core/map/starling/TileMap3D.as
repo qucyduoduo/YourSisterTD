@@ -1,23 +1,23 @@
-package game.starling.view
+package game.core.map.starling
 {
 	import common.base.views.starling.BaseView;
+	import common.utils.QuadNode;
+	import common.utils.QuadTrees;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import game.app.managers.Depth3DMgr;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
-	import game.app.managers.Depth3DMgr;
-	import game.core.models.statics.Tile25MapModel;
-	import game.untils.QuadNode;
-	import game.untils.QuadTrees;
+	import game.core.models.statics.TileMapModel;
 	
 	import starling.display.Sprite;
 	
-	public class Tile25MapView3D extends BaseView implements IMapView
+	public class TileMap3D extends BaseView implements IMapView
 	{
-		private var mapView:TileMapView3D;
+		private var mapView:Map3D;
 		
 		public function get model():IMapModel{
 			return mapView.model;
@@ -41,35 +41,32 @@ package game.starling.view
 		public function set objTree(value:QuadTrees):void{
 			mapView.objTree = value;
 		}
-		
-		public function Tile25MapView3D()	{
+		public function TileMap3D(){
 			super();
-			mapView = new TileMapView3D();
+			mapView = new Map3D();
 			this.addChild( mapView );
 		}
-		
 		override public function init( data:Object = null):void {
-			model = new Tile25MapModel( data );
+			model = new TileMapModel( data );
 			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 ,512));
-			var len:uint;
-			len =  model.dataArr.length;
+			var len:uint =  model.dataArr.length;
 			for (var j:uint = 0;j<len;j++){
 				for (var i:uint = 0;i<len;i++){
 					drawBlock( model.dataArr[j][i],i,j );
 				}
 			}
+			
 			Depth3DMgr.swapDepthAll(contentLevel, "y");
 		}
-		
 		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
-			var block:Tile25BlockView3D = new Tile25BlockView3D();
+			var block:TileBlock3D = new TileBlock3D();
 			block.init( [num, _x, _y]);
 			if(num > 0){
 				contentLevel.addChild( block );
 			} else {
 				groundLevel.addChild( block );
 			}
-			//45度角仍旧使用模型的坐标系统
+			//这里要改成45度角仍旧使用模型的坐标系统
 			objTree.insertObj(block);
 		}
 		/**

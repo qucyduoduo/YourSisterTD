@@ -43,6 +43,9 @@
     <classEntry path="common.core.display.starling.TPAnimation"/>
     <classEntry path="common.core.display.starling.TPSequence"/>
     <classEntry path="common.core.display.starling.TPMovieClip"/>
+    <classEntry path="common.utils.QuadNode"/>
+    <classEntry path="common.utils.interfaces.INode"/>
+    <classEntry path="common.utils.QuadTrees"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
