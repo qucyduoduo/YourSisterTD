@@ -5,22 +5,22 @@ package game.starling.view
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.controllers.dynamics.MonsterController;
-	import game.events.ActionEvent;
-	import game.events.ModelEvent;
-	import game.interfaces.IMapView;
-	import game.managers.Depth3DMgr;
-	import game.managers.TextureMgr;
-	import game.models.base.ObjectModel;
-	import game.models.dynamics.MonsterModel;
-	import game.models.statics.MapModel;
+	import game.core.controllers.dynamics.MonsterController;
+	import game.core.events.ActionEvent;
+	import game.core.events.ModelEvent;
+	import game.core.interfaces.IMapView;
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
+	import game.base.models.ObjectModel;
+	import game.core.models.dynamics.MonsterModel;
+	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.display.Quad;
 	import starling.textures.TextureAtlas;
 	
-	public class MonsterView3D extends ObjectView3D
+	public class MonsterView3D extends ObjectView
 	{
 		private var _model:MonsterModel;
 		private var _controller:MonsterController;

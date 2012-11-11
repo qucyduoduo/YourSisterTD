@@ -3,10 +3,10 @@ package game.starling.view
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
-	import game.controllers.statics.BlockController;
-	import game.events.ModelEvent;
-	import game.models.statics.BlockModel;
-	import game.models.statics.MapModel;
+	import game.core.statics.BlockController;
+	import game.core.events.ModelEvent;
+	import game.core.models.statics.BlockModel;
+	import game.core.models.statics.MapModel;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;

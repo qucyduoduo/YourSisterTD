@@ -1,14 +1,14 @@
 package
 {
-	import common.managers.EventMgr;
-	import common.managers.MainMgr;
-	import common.managers.MgrType;
-	import common.managers.ScriptMgr;
-	import common.managers.UIMgr;
-	import common.nostarling.managers.DisplayMgr;
-	import common.nostarling.managers.LayerMgr;
-	import common.starling.managers.Display3DMgr;
-	import common.starling.managers.Layer3DMgr;
+	import game.core.managers.EventMgr;
+	import game.core.managers.MainMgr;
+	import game.core.managers.MgrType;
+	import game.core.managers.ScriptMgr;
+	import game.core.managers.UIMgr;
+	import game.core.managers.nostarling.DisplayMgr;
+	import game.core.managers.nostarling.LayerMgr;
+	import game.core.managers.starling.Display3DMgr;
+	import game.core.managers.starling.Layer3DMgr;
 	import common.utils.TextTool;
 	
 	import flash.display.Sprite;
@@ -24,7 +24,7 @@ package
 	
 	import starling.core.Starling;
 	
-	[SWF(width="960", height="640", frameRate="60")]
+	[SWF(width="960", height="640", frameRate="60",backgroundColor="0x000000")]
 	public class _Web_Main extends Sprite
 	{
 		private var _starlingEngine:Starling;

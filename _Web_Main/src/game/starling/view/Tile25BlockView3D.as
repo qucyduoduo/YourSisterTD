@@ -4,10 +4,10 @@ package game.starling.view
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	
-	import game.controllers.statics.Tile25BlockController;
-	import game.events.ModelEvent;
-	import game.models.statics.MapModel;
-	import game.models.statics.Tile25BlockModel;
+	import game.core.statics.Tile25BlockController;
+	import game.core.events.ModelEvent;
+	import game.core.models.statics.MapModel;
+	import game.core.models.statics.Tile25BlockModel;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;

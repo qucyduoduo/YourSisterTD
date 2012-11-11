@@ -1,20 +1,20 @@
 package game.starling.view
 {
-	import common.nostarling.managers.DisplayMgr;
-	import common.starling.managers.Display3DMgr;
+	import game.core.managers.nostarling.DisplayMgr;
+	import game.core.managers.starling.Display3DMgr;
 	import common.utils.MgrObjects;
 	
 	import flash.events.Event;
 	
 	import org.rpg.controllers.tile.TileSkillBallController;
-	import game.events.ModelEvent;
-	import game.events.SkillEvent;
-	import game.interfaces.IMapView;
+	import game.core.events.ModelEvent;
+	import game.core.events.SkillEvent;
+	import game.core.interfaces.IMapView;
 	import org.rpg.managers.Depth3DMgr;
-	import org.rpg.managers.DepthMgr;
+	import game.app.managers.DepthMgr;
 	import org.rpg.models.MapModel;
 	import org.rpg.models.ObjectModel;
-	import org.rpg.models.tile.TileSkillBallModel;
+	import game.core.models.TileSkillBallModel;
 
 	public class TileSkillBallView3D extends SkillBallView3D
 	{

@@ -1,6 +1,6 @@
 package game.starling.view
 {
-	import common.starling.managers.Display3DMgr;
+	import game.core.managers.starling.Display3DMgr;
 	import common.utils.MgrObjects;
 	
 	import flash.display.BitmapData;
@@ -11,21 +11,21 @@ package game.starling.view
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import org.rpg.controllers.SkillBallController;
-	import game.events.ActionEvent;
-	import game.events.ModelEvent;
-	import game.events.SkillEvent;
-	import game.interfaces.IMapView;
+	import game.core.controllers.SkillBallController;
+	import game.core.events.ActionEvent;
+	import game.core.events.ModelEvent;
+	import game.core.events.SkillEvent;
+	import game.core.interfaces.IMapView;
 	import org.rpg.managers.Depth3DMgr;
-	import org.rpg.managers.DepthMgr;
+	import game.app.managers.DepthMgr;
 	import org.rpg.models.MapModel;
 	import org.rpg.models.ObjectModel;
-	import org.rpg.models.SkillBallModel;
+	import game.core.models.SkillBallModel;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
 
-	public class SkillBallView3D extends ObjectView3D
+	public class SkillBallView3D extends ObjectView
 	{
 		private var _model:SkillBallModel;
 		private var _controller:SkillBallController;

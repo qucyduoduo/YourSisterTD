@@ -5,13 +5,13 @@ package game.starling.view
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.controllers.statics.StaticObjectController;
-	import game.events.ModelEvent;
-	import game.interfaces.IMapView;
-	import game.managers.Depth3DMgr;
-	import game.managers.TextureMgr;
-	import game.models.statics.MapModel;
-	import game.models.statics.StaticObjectModel;
+	import game.core.statics.StaticObjectController;
+	import game.core.events.ModelEvent;
+	import game.core.interfaces.IMapView;
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
+	import game.core.models.statics.MapModel;
+	import game.core.models.statics.StaticObjectModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
@@ -21,7 +21,7 @@ package game.starling.view
 	 * 静态物体视图
 	 * @author noah
 	 */	
-	public class StaticObjectView3D extends ObjectView3D
+	public class StaticObjectView3D extends ObjectView
 	{
 		private var _model:StaticObjectModel;
 		private var _controller:StaticObjectController;

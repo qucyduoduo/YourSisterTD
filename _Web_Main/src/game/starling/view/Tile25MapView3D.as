@@ -1,21 +1,21 @@
 package game.starling.view
 {
-	import common.starling.views.BaseView3D;
+	import common.base.views.starling.BaseView;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import game.interfaces.IMapModel;
-	import game.interfaces.IMapView;
-	import game.interfaces.IObjectView;
-	import game.managers.Depth3DMgr;
-	import game.models.statics.Tile25MapModel;
+	import game.core.interfaces.IMapModel;
+	import game.core.interfaces.IMapView;
+	import game.core.interfaces.IObjectView;
+	import game.app.managers.Depth3DMgr;
+	import game.core.models.statics.Tile25MapModel;
 	import game.untils.QuadNode;
 	import game.untils.QuadTrees;
 	
 	import starling.display.Sprite;
 	
-	public class Tile25MapView3D extends BaseView3D implements IMapView
+	public class Tile25MapView3D extends BaseView implements IMapView
 	{
 		private var mapView:TileMapView3D;
 		
@@ -78,7 +78,7 @@ package game.starling.view
 		 */		
 		public function addMonster(monster:IObjectView):void{
 			objTree.insertObj( monster );
-			contentLevel.addChild( monster as BaseView3D );
+			contentLevel.addChild( monster as BaseView );
 		}
 		/**
 		 * 添加玩家
@@ -86,7 +86,7 @@ package game.starling.view
 		 */		
 		public function addPlayer(p:IObjectView):void {
 			objTree.insertObj( p );
-			contentLevel.addChild( p as BaseView3D );
+			contentLevel.addChild( p as BaseView );
 		}
 		/**
 		 * 获取指定的block

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="_Web_Main.as" projectUUID="1a8af9ee-cc7f-49e9-bbc1-dac83a254079" version="10">
   <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
-    <compilerSourcePath/>
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="E:/NoahGitHub/YourSisterTD/_Resource"/>
+    </compilerSourcePath>
     <libraryPath defaultLinkType="0">
+      <libraryPathEntry kind="3" linkType="1" path="/Starling/bin-debug/Starling.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/_Lib_Common/bin/_Lib_Common.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/_Lib_GreensockTween/bin/_Lib_GreensockTween.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/_Lib_Minimalcomps/bin/_Lib_Minimalcomps.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_charts.swc" useDefaultLinkType="false"/>
@@ -28,11 +34,6 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="3" linkType="1" path="/Starling/bin-debug/Starling.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="/_Lib_Common/bin/_Lib_Common.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="/_Lib_GreensockTween/bin/_Lib_GreensockTween.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="/_Lib_Minimalcomps/bin/_Lib_Minimalcomps.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="1" linkType="1" path="E:/NoahGitHub/YourSisterTD/RpgModel/libs"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

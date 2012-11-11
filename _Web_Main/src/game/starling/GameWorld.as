@@ -1,11 +1,10 @@
 package game.starling
 {
-	import common.starling.views.BaseView3D;
-	import common.utils.MgrObjects;
+	import common.base.views.starling.BaseView;
 	
-	import game.interfaces.IMapView;
-	import game.managers.KeyBoardMgr;
-	import game.managers.TextureMgr;
+	import game.core.interfaces.IMapView;
+	import game.app.managers.KeyBoardMgr;
+	import game.app.managers.TextureMgr;
 	import game.starling.view.MapView3D;
 	import game.starling.view.MonsterView3D;
 	import game.starling.view.PeopleView3D;
@@ -14,6 +13,7 @@ package game.starling
 	import game.starling.view.TileMonsterView3D;
 	import game.starling.view.TilePeopleView3D;
 	import game.untils.MapLoader;
+	import game.untils.MgrObjects;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -89,7 +89,7 @@ package game.starling
 				map = new Tile25MapView3D();
 			}
 			
-			stage.addChild( map as BaseView3D);
+			stage.addChild( map as BaseView);
 			map.init( strMapData["mapdata"] );
 			
 			if(GAME_MODE == 1){
@@ -103,8 +103,8 @@ package game.starling
 			
 			monsterArr = [];
 			
-			for(var i:uint=4;i<12;i++){
-				for(var j:uint=4;j<12;j++){
+			for(var i:uint=4;i<8;i++){
+				for(var j:uint=4;j<8;j++){
 					if(GAME_MODE == 1){
 						monster = new MonsterView3D();
 					} else if(GAME_MODE == 2 || GAME_MODE == 3){

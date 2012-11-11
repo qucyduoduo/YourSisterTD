@@ -1,13 +1,13 @@
 package game.starling.view
 {
-	import game.controllers.dynamics.TileMonsterController;
-	import game.events.ActionEvent;
-	import game.events.ModelEvent;
-	import game.interfaces.IMapView;
-	import game.managers.Depth3DMgr;
-	import game.managers.TextureMgr;
-	import game.models.dynamics.TileMonsterModel;
-	import game.models.statics.MapModel;
+	import game.core.controllers.dynamics.TileMonsterController;
+	import game.core.events.ActionEvent;
+	import game.core.events.ModelEvent;
+	import game.core.interfaces.IMapView;
+	import game.app.managers.Depth3DMgr;
+	import game.app.managers.TextureMgr;
+	import game.core.models.dynamics.TileMonsterModel;
+	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;

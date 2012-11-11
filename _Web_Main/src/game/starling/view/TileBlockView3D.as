@@ -3,15 +3,15 @@ package game.starling.view
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
-	import game.controllers.statics.TileBlockController;
-	import game.events.ModelEvent;
-	import game.models.statics.MapModel;
-	import game.models.statics.TileBlockModel;
+	import game.core.statics.TileBlockController;
+	import game.core.events.ModelEvent;
+	import game.core.models.statics.MapModel;
+	import game.core.models.statics.TileBlockModel;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
-	public class TileBlockView3D extends ObjectView3D
+	public class TileBlockView3D extends ObjectView
 	{
 		private var _model:TileBlockModel;
 		private var _controller:TileBlockController;

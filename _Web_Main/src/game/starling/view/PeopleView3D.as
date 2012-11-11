@@ -2,14 +2,14 @@ package game.starling.view
 {
 	import flash.events.Event;
 	
-	import game.controllers.dynamics.PeopleController;
-	import game.events.ActionEvent;
-	import game.events.ModelEvent;
-	import game.interfaces.IMapView;
-	import game.interfaces.IPeopleView;
-	import game.managers.TextureMgr;
-	import game.models.dynamics.PeopleModel;
-	import game.models.statics.MapModel;
+	import game.core.controllers.dynamics.PeopleController;
+	import game.core.events.ActionEvent;
+	import game.core.events.ModelEvent;
+	import game.core.interfaces.IMapView;
+	import game.core.interfaces.IPeopleView;
+	import game.app.managers.TextureMgr;
+	import game.core.models.dynamics.PeopleModel;
+	import game.core.models.statics.MapModel;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
