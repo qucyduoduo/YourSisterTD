@@ -1,16 +1,12 @@
 package game.core.unit.starling
 {
 	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.TileMonsterController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
 	import game.core.models.dynamics.TileMonsterModel;
 	import game.core.models.statics.MapModel;
-	
-	import starling.core.Starling;
-	import starling.display.MovieClip;
 	
 	public class TileEnemy3DUnit extends Enemy3DUnit
 	{
@@ -72,18 +68,6 @@ package game.core.unit.starling
 			if(_model.currentDir != tempDir){
 				trace("[TilePeopleView]" + _model.currentDir, tempDir);
 				_model.currentDir = tempDir;
-				removeChild(m);
-				Starling.juggler.remove(m);
-				if(tempDir < 10){
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + tempDir), frameRate);
-				} else {
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m" + tempDir), frameRate);
-				}
-				m.x = -20;
-				m.y = -80;
-				trace( "[TilePeopleView] 当前 tempDir: " + tempDir );
-				addChild(m);
-				Starling.juggler.add(m);
 			}
 			if(this.parent){
 				Depth3DMgr.swapDepth(this, model.posY);

@@ -1,14 +1,5 @@
 package
 {
-	import game.core.managers.EventMgr;
-	import game.core.managers.MainMgr;
-	import game.core.managers.MgrType;
-	import game.core.managers.ScriptMgr;
-	import game.core.managers.UIMgr;
-	import game.core.managers.nostarling.DisplayMgr;
-	import game.core.managers.nostarling.LayerMgr;
-	import game.core.managers.starling.Display3DMgr;
-	import game.core.managers.starling.Layer3DMgr;
 	import common.utils.TextTool;
 	
 	import flash.display.Sprite;
@@ -19,6 +10,15 @@ package
 	import flash.text.TextFormat;
 	import flash.utils.setTimeout;
 	
+	import game.core.managers.EventMgr;
+	import game.core.managers.MainMgr;
+	import game.core.managers.MgrType;
+	import game.core.managers.ScriptMgr;
+	import game.core.managers.UIMgr;
+	import game.core.managers.nostarling.DisplayMgr;
+	import game.core.managers.nostarling.LayerMgr;
+	import game.core.managers.starling.Display3DMgr;
+	import game.core.managers.starling.Layer3DMgr;
 	import game.nostarling.GameWorld;
 	import game.starling.GameWorld;
 	

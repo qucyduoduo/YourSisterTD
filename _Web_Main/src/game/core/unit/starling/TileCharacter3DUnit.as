@@ -1,7 +1,6 @@
 package  game.core.unit.starling
 {
 	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.TilePeopleController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
@@ -9,9 +8,6 @@ package  game.core.unit.starling
 	import game.core.interfaces.IPeopleView;
 	import game.core.models.dynamics.TilePeopleModel;
 	import game.core.models.statics.MapModel;
-	
-	import starling.core.Starling;
-	import starling.display.MovieClip;
 	
 	public class TileCharacter3DUnit extends Character3DUint implements IPeopleView
 	{
@@ -84,18 +80,6 @@ package  game.core.unit.starling
 			if(_model.currentDir != tempDir){
 				trace("[TilePeopleView3D]" + _model.currentDir, tempDir);
 				_model.currentDir = tempDir;
-				removeChild(m);
-				Starling.juggler.remove(m);
-				if(tempDir < 10){
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + tempDir), frameRate);
-				} else {
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m" + tempDir), frameRate);
-				}
-				m.x = -20;
-				m.y = -80;
-				trace( "[TilePeopleView3D] 当前 tempDir: " + tempDir );
-				addChild(m);
-				Starling.juggler.add(m);
 			}
 			if(this.parent){
 				Depth3DMgr.swapDepth(this, model.posY);

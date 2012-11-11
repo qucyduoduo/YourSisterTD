@@ -6,7 +6,6 @@ package game.core.unit.starling
 	import flashx.textLayout.formats.TextAlign;
 	
 	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
 	import game.base.models.ObjectModel;
 	import game.core.controllers.dynamics.MonsterController;
 	import game.core.events.ActionEvent;
@@ -25,7 +24,6 @@ package game.core.unit.starling
 		private var _model:MonsterModel;
 		private var _controller:MonsterController;
 		
-		protected var m:MovieClip;
 		protected var autoMoveSteps:uint;
 		protected var currentMap:IMapView;
 		protected var frameRate:uint = 8;
@@ -75,9 +73,6 @@ package game.core.unit.starling
 			q = new Quad(4,4,0x00ff00);
 			this.addChild(q);
 			modelTypeID = testParam - 1;
-			m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + model.dir), frameRate);
-			addChild(m);
-			Starling.juggler.add(m);
 		}
 		
 		override public function onUpdateHandler(event:Event):void {
@@ -101,18 +96,6 @@ package game.core.unit.starling
 			if(_model.currentDir != _model.dir){
 				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
 				_model.currentDir = _model.dir;
-				removeChild(m);
-				Starling.juggler.remove(m);
-				if(_model.dir < 10){
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + model.dir), frameRate);
-				} else {
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m" + model.dir), frameRate);
-				}
-				m.x = -20;
-				m.y = -80;
-				//trace( "[MonsterView3D]当前 _model.dir: " + _model.dir );
-				addChild(m);
-				Starling.juggler.add(m);
 			}
 			if(this.parent){
 				Depth3DMgr.swapDepth(this, model.posY);

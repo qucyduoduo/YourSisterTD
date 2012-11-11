@@ -2,7 +2,6 @@ package  game.core.unit.starling
 {
 	import flash.events.Event;
 	
-	import game.app.managers.TextureMgr;
 	import game.core.controllers.dynamics.PeopleController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
@@ -10,9 +9,6 @@ package  game.core.unit.starling
 	import game.core.interfaces.IPeopleView;
 	import game.core.models.dynamics.PeopleModel;
 	import game.core.models.statics.MapModel;
-	
-	import starling.core.Starling;
-	import starling.display.MovieClip;
 	
 	/**
 	 * 人物视图
@@ -82,18 +78,6 @@ package  game.core.unit.starling
 			if(_model.currentDir != _model.dir){
 				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
 				_model.currentDir = _model.dir;
-				removeChild(m);
-				Starling.juggler.remove(m);
-				if(_model.dir < 10){
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + model.dir), frameRate);
-				} else {
-					m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m" + model.dir), frameRate);
-				}
-				m.x = -20;
-				m.y = -80;
-				//trace( "[PeopleView3D] 当前 _model.dir: " + _model.dir );
-				addChild(m);
-				Starling.juggler.add(m);
 			}
 			super.draw();
 		}

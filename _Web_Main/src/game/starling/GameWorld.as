@@ -3,15 +3,14 @@ package game.starling
 	import common.base.views.starling.BaseView;
 	
 	import game.app.managers.KeyBoardMgr;
-	import game.app.managers.TextureMgr;
 	import game.core.interfaces.IMapView;
 	import game.core.map.starling.Map3D;
+	import game.core.map.starling.Tile25Map3D;
+	import game.core.map.starling.TileMap3D;
 	import game.core.unit.starling.Character3DUint;
 	import game.core.unit.starling.Enemy3DUnit;
 	import game.core.unit.starling.TileCharacter3DUnit;
 	import game.core.unit.starling.TileEnemy3DUnit;
-	import game.core.map.starling.Tile25Map3D;
-	import game.core.map.starling.TileMap3D;
 	import game.untils.MapLoader;
 	import game.untils.MgrObjects;
 	
@@ -91,9 +90,7 @@ package game.starling
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
 			//1 平面 ，2斜角，3TIle斜角
-			GAME_MODE = 2;
-			
-			TextureMgr.instance.init();
+			GAME_MODE = 1;
 			
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)

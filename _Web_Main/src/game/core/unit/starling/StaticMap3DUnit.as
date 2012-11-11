@@ -6,15 +6,12 @@ package game.core.unit.starling
 	import flashx.textLayout.formats.TextAlign;
 	
 	import game.app.managers.Depth3DMgr;
-	import game.app.managers.TextureMgr;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
 	import game.core.models.statics.MapModel;
 	import game.core.models.statics.StaticObjectModel;
 	import game.core.statics.StaticObjectController;
-	import game.core.unit.starling.Map3DUnit;
 	
-	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.display.Quad;
 	
@@ -31,7 +28,6 @@ package game.core.unit.starling
 		public var isAniPlaying:Boolean;
 		public var childIndex:uint;
 		
-		protected var m:MovieClip;
 		protected var autoMoveSteps:uint;
 		protected var currentMap:IMapView;
 		protected var frameRate:uint = 8;
@@ -84,9 +80,6 @@ package game.core.unit.starling
 			q = new Quad(4,4,0xff0000);
 			this.addChild(q);
 			modelTypeID = testParam - 1;
-			m = new MovieClip(TextureMgr.instance.getTextures(modelTypeID, "m0" + model.dir), frameRate);
-			addChild(m);
-			Starling.juggler.add(m);
 		}
 	}
 }
