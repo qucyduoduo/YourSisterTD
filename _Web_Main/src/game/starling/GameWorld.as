@@ -90,7 +90,7 @@ package game.starling
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
 			//1 平面 ，2斜角，3TIle斜角
-			GAME_MODE = 1;
+			GAME_MODE = 3;
 			
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)

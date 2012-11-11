@@ -35,28 +35,35 @@ package game.core.map.starling
 		
 		protected var _model:IMapModel;
 		
-		public function get groundLevel():Sprite{
+		public function get groundLevel():Sprite
+		{
 			return this._groundLevel;
 		}
-		public function get contentLevel():Sprite{
+		public function get contentLevel():Sprite
+		{
 			return this._contentLevel;
 		}
-		public function get airLevel():Sprite{
+		public function get airLevel():Sprite
+		{
 			return this._airLevel;
 		}
 		
-		public function get model():IMapModel{
+		public function get model():IMapModel
+		{
 			return _model;
 		}
-		public function set model(value:IMapModel):void{
+		public function set model(value:IMapModel):void
+		{
 			this._model = value;
 		}
 		
-		public function get objTree():QuadTrees{
+		public function get objTree():QuadTrees
+		{
 			return this._objTree;
 		}
 		
-		public function set objTree(value:QuadTrees):void{
+		public function set objTree(value:QuadTrees):void
+		{
 			this._objTree = value;
 		}
 		
@@ -87,8 +94,10 @@ package game.core.map.starling
 			_model = new MapModel( data );
 			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 , 512));
 			var len:uint =  _model.dataArr.length;
-			for (var j:uint = 0;j<len;j++){
-				for (var i:uint = 0;i<len;i++){
+			for (var j:uint = 0;j<len;j++)
+			{
+				for (var i:uint = 0;i<len;i++)
+				{
 					drawBlock( _model.dataArr[j][i],i,j );
 				}
 			}
@@ -100,7 +109,8 @@ package game.core.map.starling
 		 * @param _x
 		 * @param _y
 		 */		
-		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
+		protected function drawBlock( num:uint, _x:uint, _y:uint):void 
+		{
 			var block:Map3DBlock = new Map3DBlock();
 			block.init([ num, _x, _y]);
 			if(num > 0){
@@ -114,7 +124,8 @@ package game.core.map.starling
 		 * 添加怪物
 		 * @param monster
 		 */		
-		public function addMonster(monster:IObjectView):void{
+		public function addMonster(monster:IObjectView):void
+		{
 			objTree.insertObj( monster );
 			this._contentLevel.addChild( monster as BaseView );
 		}
@@ -122,7 +133,8 @@ package game.core.map.starling
 		 * 添加玩家
 		 * @param p
 		 */		
-		public function addPlayer(p:IObjectView):void {
+		public function addPlayer(p:IObjectView):void 
+		{
 			objTree.insertObj( p );
 			this._contentLevel.addChild( p as BaseView );
 		}
@@ -130,8 +142,8 @@ package game.core.map.starling
 		 * 获取指定的block
 		 * @param args
 		 */		
-		public function getBlocks( pArr:Array):Array{
-			
+		public function getBlocks( pArr:Array):Array
+		{
 			var arr:Array = [];
 			for each(var point:Point in pArr){
 				var newNode:QuadNode = this.objTree.nodes.get(point.x + "-" + point.y) as QuadNode;
