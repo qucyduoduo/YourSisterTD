@@ -11,5 +11,8 @@ package game.core.managers
 		
 		public static const DISPLAY3D_MGR:String = "display3DMgr";
 		public static const LAYER3D_MGR:String = "layer3DMgr";
+
+		public static const DEBUG_MGR:String = "debugMgr";
+		
 	}
 }

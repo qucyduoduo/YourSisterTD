@@ -1,7 +1,5 @@
 package  game.core.models.dynamics
 {
-	import common.utils.TextTool;
-	
 	import game.core.interfaces.IDynamicObjectModel;
 	import game.core.interfaces.IMapModel;
 	import game.core.models.statics.StaticObjectModel;
@@ -61,8 +59,6 @@ package  game.core.models.dynamics
 					modY += 0.7 * speed;
 				} 
 				onHitTestY( mapModel );
-				
-				TextTool.setText(0, "x= " + gridX + "   y= " + gridY);
 				oldDir = dir;
 			} else {
 				if(oldDir != dir){

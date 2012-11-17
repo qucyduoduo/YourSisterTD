@@ -1,11 +1,11 @@
 package game.app.managers
 {
 	import common.base.managers.BaseMgr;
+	import common.utils.QuadNode;
+	import common.utils.interfaces.INode;
 	
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IPeopleModel;
-	import common.utils.interfaces.INode;
-	import common.utils.QuadNode;
 	
 	import starling.events.Event;
 

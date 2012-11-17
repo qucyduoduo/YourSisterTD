@@ -15,7 +15,6 @@ package game.starling
 	import game.untils.MgrObjects;
 	
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.EnterFrameEvent;
 	import starling.events.Event;
@@ -29,15 +28,15 @@ package game.starling
 		/**
 		 * 
 		 */		
-		private var p:Character3DUint;
+		private var characterUnit:Character3DUint;
 		/**
 		 * 
 		 */		
-		private var monster:Enemy3DUnit;
+		private var enemyUnit:Enemy3DUnit;
 		/**
 		 * 
 		 */		
-		private var monsterArr:Array;
+		private var enemyUnitArr:Array;
 		/**
 		 *  
 		 */		
@@ -50,15 +49,8 @@ package game.starling
 		public function GameWorld()
 		{
 			super();
-			
-			if(stage)
-			{
-				initialize();
-			}
-			else
-			{
-				addEventListener(Event.ADDED_TO_STAGE, initialize);
-			}
+			if(stage) initialize();
+			else addEventListener(Event.ADDED_TO_STAGE, initialize);
 		}
 		
 		private function initialize(e:Event = null):void
@@ -68,23 +60,22 @@ package game.starling
 			stage.color = 0;
 			
 			Starling.current.showStats = true;
-			var stats:DisplayObject = Starling.current.stage.getChildAt(stage.numChildren-1);
-			stats.y = 50;
+//			var stats:DisplayObject = Starling.current.stage.getChildAt(stage.numChildren-1);
+//			stats.y = 50;
 
 			Starling.current.antiAliasing = 0;
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownEventHandle);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUpEventHandle);
-			
 			stage.addEventListener(TouchEvent.TOUCH, onTouch);
-			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
 			
 			MgrObjects.display3DMgr.init( this );
 			MgrObjects.layer3DMgr.init();
 			
-//			MainMgr.instance.loadUI();
-			//stage.addEventListener(TouchEvent.TOUCH, onTouch);
-			MapLoader.load( onMapJsonLoadCompleteHandler );
+//			MgrObjects.uiMgr.init(();
+//			MapLoader.load( onMapJsonLoadCompleteHandler );
+			
+			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
 		}
 		
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
@@ -111,17 +102,17 @@ package game.starling
 			
 			if(GAME_MODE == 1)
 			{
-				p = new Character3DUint();
+				characterUnit = new Character3DUint();
 			}
 			else if(GAME_MODE == 2 || GAME_MODE == 3)
 			{
-				p = new TileCharacter3DUnit();
+				characterUnit = new TileCharacter3DUnit();
 			}
-			p.init( [1,8,5,4] );
-			p.draw();
-			map.addPlayer( p );
+			characterUnit.init( [1,8,5,4] );
+			characterUnit.draw();
+			map.addPlayer( characterUnit );
 			
-			monsterArr = [];
+			enemyUnitArr = [];
 			
 			for(var i:uint=4;i<8;i++)
 			{
@@ -129,16 +120,16 @@ package game.starling
 				{
 					if(GAME_MODE == 1)
 					{
-						monster = new Enemy3DUnit();
+						enemyUnit = new Enemy3DUnit();
 					}
 					else if(GAME_MODE == 2 || GAME_MODE == 3)
 					{
-						monster = new TileEnemy3DUnit();
+						enemyUnit = new TileEnemy3DUnit();
 					}
-					monsterArr.push(monster);
-					monster.init( [3,j,i] );
-					monster.draw();
-					map.addMonster( monster );
+					enemyUnitArr.push(enemyUnit);
+					enemyUnit.init( [3,j,i] );
+					enemyUnit.draw();
+					map.addMonster( enemyUnit );
 				}
 			}
 			
@@ -153,15 +144,15 @@ package game.starling
 		 */			
 		private function onUpdateHandler(e:Event):void{
 			
-			if(p)
+			if( characterUnit )
 			{
-				p.onInputHandler( map );
+				characterUnit.onInputHandler( map );
 			}
-			for each(monster in monsterArr)
+			for each(enemyUnit in enemyUnitArr)
 			{
-				if(monster)
+				if(enemyUnit)
 				{
-					monster.onInputHandler( map );
+					enemyUnit.onInputHandler( map );
 				}
 			}
 		}
@@ -183,7 +174,7 @@ package game.starling
 			var touch:Touch = event.getTouch(stage);
 			if (touch && touch.phase != TouchPhase.HOVER)
 			{
-				trace( "[RpgMain]" + touch.globalX, touch.globalY );
+				trace( "[GameWorld] onTouch " + touch.globalX, touch.globalY );
 			}			
 		}
 		
@@ -195,12 +186,12 @@ package game.starling
 		
 		private function onKeyUpEventHandle(e:KeyboardEvent):void
 		{
-			trace("onKeyUpEventHandle:", e.keyCode);
+//			trace("onKeyUpEventHandle:", e.keyCode);
 		}
 		
 		private function onKeyDownEventHandle(e:KeyboardEvent):void
 		{
-			trace("onKeyDownEventHandle:", e.keyCode);
+//			trace("onKeyDownEventHandle:", e.keyCode);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package game.untils
 {
+	import game.core.managers.DebugMgr;
 	import game.core.managers.EventMgr;
 	import game.core.managers.MainMgr;
 	import game.core.managers.MgrType;
@@ -45,6 +46,11 @@ package game.untils
 		public static function get layer3DMgr():Layer3DMgr
 		{
 			return MainMgr.instance.getMgr( MgrType.LAYER3D_MGR ) as Layer3DMgr;
+		}
+		
+		public static function get debugMgr():DebugMgr
+		{
+			return MainMgr.instance.getMgr( MgrType.DEBUG_MGR ) as DebugMgr;
 		}
 	}
 }
