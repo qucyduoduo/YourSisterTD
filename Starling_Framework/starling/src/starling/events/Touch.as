@@ -68,6 +68,7 @@ package starling.events
             mTarget = target;
             mPressure = mWidth = mHeight = 1.0;
             mBubbleChain = new <EventDispatcher>[];
+            updateBubbleChain();
         }
         
         /** Converts the current location of a touch to the local coordinate system of a display 
@@ -76,7 +77,7 @@ package starling.events
         public function getLocation(space:DisplayObject, resultPoint:Point=null):Point
         {
             if (resultPoint == null) resultPoint = new Point();
-            mTarget.base.getTransformationMatrix(space, sHelperMatrix);
+            space.base.getTransformationMatrix(space, sHelperMatrix);
             return MatrixUtil.transformCoords(sHelperMatrix, mGlobalX, mGlobalY, resultPoint); 
         }
         
@@ -86,7 +87,7 @@ package starling.events
         public function getPreviousLocation(space:DisplayObject, resultPoint:Point=null):Point
         {
             if (resultPoint == null) resultPoint = new Point();
-            mTarget.base.getTransformationMatrix(space, sHelperMatrix);
+            space.base.getTransformationMatrix(space, sHelperMatrix);
             return MatrixUtil.transformCoords(sHelperMatrix, mPreviousGlobalX, mPreviousGlobalY, resultPoint);
         }
         
@@ -104,6 +105,12 @@ package starling.events
             return resultPoint;
         }
         
+        /** Indicates if the target or one of its children is touched. */ 
+        public function isTouching(target:DisplayObject):Boolean
+        {
+            return mBubbleChain.indexOf(target) != -1;
+        }
+        
         /** Returns a description of the object. */
         public function toString():String
         {
@@ -119,6 +126,9 @@ package starling.events
             clone.mPreviousGlobalY = mPreviousGlobalY;
             clone.mTapCount = mTapCount;
             clone.mTimestamp = mTimestamp;
+            clone.mPressure = mPressure;
+            clone.mWidth = mWidth;
+            clone.mHeight = mHeight;
             return clone;
         }
         
@@ -131,7 +141,7 @@ package starling.events
                 var length:int = 1;
                 var element:DisplayObject = mTarget;
                 
-                mBubbleChain.length = 0;
+                mBubbleChain.length = 1;
                 mBubbleChain[0] = element;
                 
                 while ((element = element.parent) != null)
@@ -193,6 +203,12 @@ package starling.events
         starling_internal function dispatchEvent(event:TouchEvent):void
         {
             if (mTarget) event.dispatch(mBubbleChain);
+        }
+        
+        /** @private */
+        starling_internal function get bubbleChain():Vector.<EventDispatcher>
+        {
+            return mBubbleChain.concat();
         }
         
         /** @private */
