@@ -5,7 +5,7 @@ package game.core.unit.starling
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.app.managers.Depth3DMgr;
+	import game.app.managers.DepthMgr;
 	import game.base.models.ObjectModel;
 	import game.core.controllers.dynamics.MonsterController;
 	import game.core.events.ActionEvent;
@@ -98,7 +98,7 @@ package game.core.unit.starling
 				_model.currentDir = _model.dir;
 			}
 			if(this.parent){
-				Depth3DMgr.swapDepth(this, model.posY);
+				DepthMgr.swapDepth(this, model.posY);
 			}
 		}
 	}

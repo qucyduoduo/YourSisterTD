@@ -1,6 +1,6 @@
-package game.core.map.starling
+package game.core.map
 {
-	import game.base.starling.GameUint;
+	import game.base.views.GameUint;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	

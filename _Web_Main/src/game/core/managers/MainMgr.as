@@ -7,15 +7,10 @@ package game.core.managers
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 	
-	import game.core.managers.nostarling.DisplayMgr;
-	import game.core.managers.nostarling.LayerMgr;
-	import game.core.managers.starling.Display3DMgr;
-	import game.core.managers.starling.Layer3DMgr;
 	import game.starling.GameWorld;
 	import game.untils.MgrObjects;
 	
 	import starling.core.Starling;
-	import starling.display.Quad;
 
 	/**
 	 * 全局管理类(单例 + 静态方法)
@@ -75,9 +70,6 @@ package game.core.managers
 			MainMgr.instance.addMgr( MgrType.SCRIPT_MGR , new ScriptMgr() );
 			MainMgr.instance.addMgr( MgrType.UI_MGR , new UIMgr() );
 			MainMgr.instance.addMgr( MgrType.DISPLAY_MGR , new DisplayMgr() );
-			MainMgr.instance.addMgr( MgrType.LAYER_MGR , new LayerMgr() );
-			MainMgr.instance.addMgr( MgrType.DISPLAY3D_MGR , new Display3DMgr() );
-			MainMgr.instance.addMgr( MgrType.LAYER3D_MGR , new Layer3DMgr() );
 			MainMgr.instance.addMgr( MgrType.DEBUG_MGR , new DebugMgr() );
 		}
 		

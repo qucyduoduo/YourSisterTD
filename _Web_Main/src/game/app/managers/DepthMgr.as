@@ -1,11 +1,14 @@
-﻿package game.app.managers {
-    import flash.display.*;
-    import flash.utils.*;
+﻿package  game.app.managers
+{
+	import flash.utils.Dictionary;
+	
+	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	/**
-	 * 显示对象排序管理器  
+	 * 显示对象排序管理器 
 	 * @author noah
 	 * 
-	 */
+	 */	
     public class DepthMgr {
 
         private static var managers:Dictionary;

@@ -2,7 +2,7 @@ package  game.core.events
 {
 	import common.base.events.BaseEvent;
 	
-	import game.core.map.starling.Map3D;
+	import game.core.map.Map3D;
 	
 	public class ActionEvent extends BaseEvent
 	{

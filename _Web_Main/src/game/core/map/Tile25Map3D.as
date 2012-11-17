@@ -1,4 +1,4 @@
-package game.core.map.starling
+package game.core.map
 {
 	import common.base.views.starling.BaseView;
 	
@@ -8,7 +8,7 @@ package game.core.map.starling
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
-	import game.app.managers.Depth3DMgr;
+	import game.app.managers.DepthMgr;
 	import game.core.models.statics.Tile25MapModel;
 	import common.utils.QuadNode;
 	import common.utils.QuadTrees;
@@ -58,7 +58,7 @@ package game.core.map.starling
 					drawBlock( model.dataArr[j][i],i,j );
 				}
 			}
-			Depth3DMgr.swapDepthAll(contentLevel, "y");
+			DepthMgr.swapDepthAll(contentLevel, "y");
 		}
 		
 		protected function drawBlock( num:uint, _x:uint, _y:uint):void {

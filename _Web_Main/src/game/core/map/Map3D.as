@@ -1,4 +1,4 @@
-package game.core.map.starling
+package game.core.map
 {
 	import common.base.views.starling.BaseView;
 	import common.utils.QuadNode;
@@ -7,8 +7,8 @@ package game.core.map.starling
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import game.app.managers.Depth3DMgr;
-	import game.base.starling.GameUint;
+	import game.app.managers.DepthMgr;
+	import game.base.views.GameUint;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
@@ -101,7 +101,7 @@ package game.core.map.starling
 					drawBlock( _model.dataArr[j][i],i,j );
 				}
 			}
-			Depth3DMgr.swapDepthAll(this._contentLevel, "y");
+			DepthMgr.swapDepthAll(this._contentLevel, "y");
 		}
 		/**
 		 * 绘制单元格

@@ -4,9 +4,9 @@ package game.starling
 	
 	import game.app.managers.KeyBoardMgr;
 	import game.core.interfaces.IMapView;
-	import game.core.map.starling.Map3D;
-	import game.core.map.starling.Tile25Map3D;
-	import game.core.map.starling.TileMap3D;
+	import game.core.map.Map3D;
+	import game.core.map.Tile25Map3D;
+	import game.core.map.TileMap3D;
 	import game.core.unit.starling.Character3DUint;
 	import game.core.unit.starling.Enemy3DUnit;
 	import game.core.unit.starling.TileCharacter3DUnit;
@@ -68,20 +68,16 @@ package game.starling
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownEventHandle);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUpEventHandle);
 			stage.addEventListener(TouchEvent.TOUCH, onTouch);
-			
-			MgrObjects.display3DMgr.init( this );
-			MgrObjects.layer3DMgr.init();
+			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
 			
 //			MgrObjects.uiMgr.init(();
-//			MapLoader.load( onMapJsonLoadCompleteHandler );
-			
-			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
+			MapLoader.load( onMapJsonLoadCompleteHandler );
 		}
 		
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
 			//1 平面 ，2斜角，3TIle斜角
-			GAME_MODE = 3;
+			GAME_MODE = 2;
 			
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)
@@ -133,7 +129,6 @@ package game.starling
 				}
 			}
 			
-			stage.addEventListener(Event.ENTER_FRAME, onUpdateHandler);
 			KeyBoardMgr.instance.init( MgrObjects.displayMgr.getStage );;
 		}
 		
@@ -142,7 +137,7 @@ package game.starling
 		 * 1下 2右下 3右 4右上 5上 6左上 7左 8左下
 		 * @param e
 		 */			
-		private function onUpdateHandler(e:Event):void{
+		private function onEnterFrame(e:EnterFrameEvent):void{
 			
 			if( characterUnit )
 			{
@@ -159,14 +154,6 @@ package game.starling
 		private function onRemovedFromStage(event:Event):void
 		{
 			//stage.removeEventListener(TouchEvent.TOUCH, onTouch);
-		}
-		/**
-		 * 
-		 * @param event
-		 */		
-		private function onEnterFrame(event:EnterFrameEvent):void
-		{
-			
 		}
 		
 		private function onTouch(event:TouchEvent):void

@@ -1,4 +1,4 @@
-package game.base.starling
+package game.base.views
 {
 	import common.base.views.starling.BaseView;
 	

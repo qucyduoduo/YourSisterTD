@@ -1,6 +1,6 @@
 package game.core.unit.starling
 {
-	import game.app.managers.Depth3DMgr;
+	import game.app.managers.DepthMgr;
 	import game.core.controllers.dynamics.TileMonsterController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
@@ -70,7 +70,7 @@ package game.core.unit.starling
 				_model.currentDir = tempDir;
 			}
 			if(this.parent){
-				Depth3DMgr.swapDepth(this, model.posY);
+				DepthMgr.swapDepth(this, model.posY);
 			}
 		}
 	}

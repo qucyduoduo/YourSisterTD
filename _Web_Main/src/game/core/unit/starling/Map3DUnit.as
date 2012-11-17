@@ -7,7 +7,7 @@ package game.core.unit.starling
 	
 	import game.base.controllers.ObjectController;
 	import game.base.models.ObjectModel;
-	import game.base.starling.GameUint;
+	import game.base.views.GameUint;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IObjectController;
 	import game.core.interfaces.IObjectModel;

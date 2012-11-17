@@ -5,7 +5,7 @@ package game.core.unit.starling
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.app.managers.Depth3DMgr;
+	import game.app.managers.DepthMgr;
 	import game.core.events.ModelEvent;
 	import game.core.interfaces.IMapView;
 	import game.core.models.statics.MapModel;
@@ -68,7 +68,7 @@ package game.core.unit.starling
 		
 		public function draw():void{
 			if(this.parent){
-				Depth3DMgr.swapDepth(this, model.posY);
+				DepthMgr.swapDepth(this, model.posY);
 			}
 		}
 		

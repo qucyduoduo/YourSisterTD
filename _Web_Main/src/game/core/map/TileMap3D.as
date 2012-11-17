@@ -1,4 +1,4 @@
-package game.core.map.starling
+package game.core.map
 {
 	import common.base.views.starling.BaseView;
 	import common.utils.QuadNode;
@@ -7,7 +7,7 @@ package game.core.map.starling
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import game.app.managers.Depth3DMgr;
+	import game.app.managers.DepthMgr;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
@@ -56,7 +56,7 @@ package game.core.map.starling
 				}
 			}
 			
-			Depth3DMgr.swapDepthAll(contentLevel, "y");
+			DepthMgr.swapDepthAll(contentLevel, "y");
 		}
 		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
 			var block:TileBlock3D = new TileBlock3D();

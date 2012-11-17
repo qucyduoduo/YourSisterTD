@@ -1,4 +1,4 @@
-package game.core.map.starling
+package game.core.map
 {
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
