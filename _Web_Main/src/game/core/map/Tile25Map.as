@@ -1,23 +1,24 @@
 package game.core.map
 {
 	import common.base.views.starling.BaseView;
+	import common.utils.QuadNode;
+	import common.utils.QuadTrees;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import game.app.managers.DepthMgr;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
-	import game.app.managers.DepthMgr;
 	import game.core.models.statics.Tile25MapModel;
-	import common.utils.QuadNode;
-	import common.utils.QuadTrees;
+	import game.untils.MgrObjects;
 	
 	import starling.display.Sprite;
 	
-	public class Tile25Map3D extends BaseView implements IMapView
+	public class Tile25Map extends BaseView implements IMapView
 	{
-		private var mapView:TileMap3D;
+		private var mapView:TileMap;
 		
 		public function get model():IMapModel{
 			return mapView.model;
@@ -42,29 +43,31 @@ package game.core.map
 			mapView.objTree = value;
 		}
 		
-		public function Tile25Map3D()	{
+		public function Tile25Map()	{
 			super();
-			mapView = new TileMap3D();
+			mapView = new TileMap();
 			this.addChild( mapView );
 		}
 		
-		override public function init( data:Object = null):void {
+		override public function init( data:Object = null):void 
+		{
 			model = new Tile25MapModel( data );
 			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 ,512));
 			var len:uint;
 			len =  model.dataArr.length;
-			for (var j:uint = 0;j<len;j++){
-				for (var i:uint = 0;i<len;i++){
+			for (var j:uint = 0;j<len;j++)
+			{
+				for (var i:uint = 0;i<len;i++)
+				{
 					drawBlock( model.dataArr[j][i],i,j );
 				}
 			}
 			DepthMgr.swapDepthAll(contentLevel, "y");
 		}
 		
-		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
-			var block:Tile25Block3D = new Tile25Block3D();
-			block.init( [num, _x, _y]);
-			if(num > 0){
+		protected function drawBlock( type:uint, x:uint, y:uint):void {
+			var block:TileMapBlock = MgrObjects.mapMgr.getTile25MapBlock( type, x, y );
+			if(type > 0){
 				contentLevel.addChild( block );
 			} else {
 				groundLevel.addChild( block );

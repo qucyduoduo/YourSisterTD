@@ -19,7 +19,7 @@ package common.utils
 			_loader = new  Loader();
 			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadUICompleteHandler);
 			_loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onFailLoadUIHandler);
-			_loader.load(new URLRequest("GCoreUI.swf"));
+			_loader.load(new URLRequest("MainUI.swf"));
 		}
 		
 		

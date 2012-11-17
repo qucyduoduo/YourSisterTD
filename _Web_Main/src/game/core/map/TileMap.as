@@ -12,12 +12,13 @@ package game.core.map
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
 	import game.core.models.statics.TileMapModel;
+	import game.untils.MgrObjects;
 	
 	import starling.display.Sprite;
 	
-	public class TileMap3D extends BaseView implements IMapView
+	public class TileMap extends BaseView implements IMapView
 	{
-		private var mapView:Map3D;
+		private var mapView:Map;
 		
 		public function get model():IMapModel{
 			return mapView.model;
@@ -41,27 +42,31 @@ package game.core.map
 		public function set objTree(value:QuadTrees):void{
 			mapView.objTree = value;
 		}
-		public function TileMap3D(){
+		public function TileMap(){
 			super();
-			mapView = new Map3D();
+			mapView = new Map();
 			this.addChild( mapView );
 		}
-		override public function init( data:Object = null):void {
+		override public function init( data:Object = null):void 
+		{
 			model = new TileMapModel( data );
 			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 ,512));
 			var len:uint =  model.dataArr.length;
-			for (var j:uint = 0;j<len;j++){
-				for (var i:uint = 0;i<len;i++){
+			for (var j:uint = 0;j<len;j++)
+			{
+				for (var i:uint = 0;i<len;i++)
+				{
 					drawBlock( model.dataArr[j][i],i,j );
 				}
 			}
 			
 			DepthMgr.swapDepthAll(contentLevel, "y");
 		}
-		protected function drawBlock( num:uint, _x:uint, _y:uint):void {
-			var block:TileBlock3D = new TileBlock3D();
-			block.init( [num, _x, _y]);
-			if(num > 0){
+		protected function drawBlock( type:uint, x:uint, y:uint):void 
+		{
+			var block:TileMapBlock = MgrObjects.mapMgr.getTileMapBlock( type, x, y );
+			if(type > 0)
+			{
 				contentLevel.addChild( block );
 			} else {
 				groundLevel.addChild( block );

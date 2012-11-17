@@ -7,5 +7,6 @@ package game.core.managers
 		public static const UI_MGR:String = "uiMgr";
 		public static const DISPLAY_MGR:String = "displayMgr";
 		public static const DEBUG_MGR:String = "debugMgr";
+		public static const MAP_MGR:String = "mapMgr";
 	}
 }

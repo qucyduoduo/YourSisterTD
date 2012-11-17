@@ -13,11 +13,12 @@ package game.core.map
 	import game.core.interfaces.IMapView;
 	import game.core.interfaces.IObjectView;
 	import game.core.models.statics.MapModel;
+	import game.untils.MgrObjects;
 	
 	import starling.animation.IAnimatable;
 	import starling.display.Sprite;
 	
-	public class Map3D extends GameUint  implements IMapView, IAnimatable
+	public class Map extends GameUint  implements IMapView, IAnimatable
 	{
 		protected var _objTree:QuadTrees;
 		/**
@@ -73,7 +74,7 @@ package game.core.map
 		 * 创建四叉树
 		 * @param data
 		 */		
-		public function Map3D()
+		public function Map()
 		{
 			super();
 			_airLevel = new Sprite();
@@ -109,11 +110,11 @@ package game.core.map
 		 * @param _x
 		 * @param _y
 		 */		
-		protected function drawBlock( num:uint, _x:uint, _y:uint):void 
+		protected function drawBlock( type:uint, x:uint, y:uint):void 
 		{
-			var block:Map3DBlock = new Map3DBlock();
-			block.init([ num, _x, _y]);
-			if(num > 0){
+			var block:MapBlock = MgrObjects.mapMgr.getMapBlock( type, x, y );
+			if(type > 0)
+			{
 				_contentLevel.addChild( block );
 			} else {
 				_groundLevel.addChild( block );

@@ -4,9 +4,9 @@ package game.starling
 	
 	import game.app.managers.KeyBoardMgr;
 	import game.core.interfaces.IMapView;
-	import game.core.map.Map3D;
-	import game.core.map.Tile25Map3D;
-	import game.core.map.TileMap3D;
+	import game.core.map.Map;
+	import game.core.map.Tile25Map;
+	import game.core.map.TileMap;
 	import game.core.unit.starling.Character3DUint;
 	import game.core.unit.starling.Enemy3DUnit;
 	import game.core.unit.starling.TileCharacter3DUnit;
@@ -77,20 +77,20 @@ package game.starling
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
 			//1 平面 ，2斜角，3TIle斜角
-			GAME_MODE = 2;
+			GAME_MODE = 1;
 			
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)
 			{
-				map = new Map3D();
+				map = new Map();
 			}
 			else if(GAME_MODE == 2)
 			{
-				map = new TileMap3D();
+				map = new TileMap();
 			} 
 			else if(GAME_MODE == 3)
 			{
-				map = new Tile25Map3D();
+				map = new Tile25Map();
 			}
 			
 			stage.addChild( map as BaseView);

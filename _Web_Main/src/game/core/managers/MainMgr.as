@@ -71,6 +71,7 @@ package game.core.managers
 			MainMgr.instance.addMgr( MgrType.UI_MGR , new UIMgr() );
 			MainMgr.instance.addMgr( MgrType.DISPLAY_MGR , new DisplayMgr() );
 			MainMgr.instance.addMgr( MgrType.DEBUG_MGR , new DebugMgr() );
+			MainMgr.instance.addMgr( MgrType.MAP_MGR , new MapMgr() );
 		}
 		
 		/**

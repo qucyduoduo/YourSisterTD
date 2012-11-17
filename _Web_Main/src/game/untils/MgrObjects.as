@@ -4,6 +4,7 @@ package game.untils
 	import game.core.managers.DisplayMgr;
 	import game.core.managers.EventMgr;
 	import game.core.managers.MainMgr;
+	import game.core.managers.MapMgr;
 	import game.core.managers.MgrType;
 	import game.core.managers.ScriptMgr;
 	import game.core.managers.UIMgr;
@@ -33,6 +34,11 @@ package game.untils
 		public static function get debugMgr():DebugMgr
 		{
 			return MainMgr.instance.getMgr( MgrType.DEBUG_MGR ) as DebugMgr;
+		}
+
+		public static function get mapMgr():MapMgr
+		{
+			return MainMgr.instance.getMgr( MgrType.MAP_MGR ) as MapMgr;
 		}
 	}
 }

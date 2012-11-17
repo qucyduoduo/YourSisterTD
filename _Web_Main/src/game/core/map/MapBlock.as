@@ -1,9 +1,5 @@
 package game.core.map
 {
-	import game.base.views.GameUint;
-	import flash.display.BitmapData;
-	import flash.display.Sprite;
-	
 	import game.core.events.ModelEvent;
 	import game.core.models.statics.BlockModel;
 	import game.core.models.statics.MapModel;
@@ -11,15 +7,16 @@ package game.core.map
 	import game.core.unit.starling.StaticMap3DUnit;
 	
 	import starling.display.Image;
-	import starling.textures.Texture;
+
 	/**
 	 * 2D地图格子视图
 	 * @author noah
 	 */	
-	public class Map3DBlock extends StaticMap3DUnit
+	public class MapBlock extends StaticMap3DUnit
 	{
 		private var _model:BlockModel;
 		private var _controller:BlockController;
+		private var _image:Image;
 		/**
 		 * 
 		 * @return 
@@ -35,7 +32,7 @@ package game.core.map
 		 * @param _x
 		 * @param _y
 		 */	
-		public function Map3DBlock()
+		public function MapBlock()
 		{
 			super();
 		}
@@ -46,26 +43,22 @@ package game.core.map
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
 			_controller = new BlockController();
 			_controller.init(_model);
+			
 			_model.num = data[0];
 			
-			var s:Sprite = new Sprite();
-			s.graphics.beginFill( _model.num > 0?0x000000:0xffffff );
-			s.graphics.lineStyle(1,0xcccccc)
-			s.graphics.lineTo( 0 , 0  );
-			s.graphics.lineTo( MapModel.BLOCK_WIDTH, 0 );
-			s.graphics.lineTo( MapModel.BLOCK_WIDTH  , MapModel.BLOCK_WIDTH );
-			s.graphics.lineTo( 0 , MapModel.BLOCK_WIDTH);
-			s.graphics.endFill();
+			_image = new Image( data[3] );
 			
-			var bd:BitmapData = new BitmapData( MapModel.BLOCK_WIDTH + 1, MapModel.BLOCK_WIDTH + 1, true, 0x00000000);
-			bd.draw( s );
-			
-			var mTexture:Texture = Texture.fromBitmapData(bd, false, false);
-			var mImage:Image = new Image(mTexture);
-			addChild(mImage);
+			addChild( _image );
 			
 			_model.modX = data[1] * MapModel.BLOCK_WIDTH;
 			_model.modY = data[2] * MapModel.BLOCK_WIDTH;
+		}
+		
+		public function clone( type:int, x:int, y:int):MapBlock
+		{
+			var clone:MapBlock = new MapBlock();
+			clone.init( [ type, x, y, _image.texture ] ) 
+			return clone;
 		}
 	}
 }

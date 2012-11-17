@@ -11,10 +11,6 @@
     <classEntry path="common.core.events.MainEvent"/>
     <classEntry path="common.core.events.ScriptEvent"/>
     <classEntry path="common.base.factory.BaseFactory"/>
-    <classEntry path="common.core.layers.nostarling.Layer"/>
-    <classEntry path="common.core.layers.starling.Layer3D"/>
-    <classEntry path="common.core.layers.nostarling.LayerAvg"/>
-    <classEntry path="common.core.layers.starling.LayerAvg3D"/>
     <classEntry path="common.core.layers.nostarling.LayerRpg"/>
     <classEntry path="common.core.layers.starling.LayerRpg3D"/>
     <classEntry path="common.base.listeners.BaseListener"/>
