@@ -11,7 +11,6 @@
       </libraryPathEntry>
       <libraryPathEntry kind="3" linkType="1" path="/Starling/bin-debug/Starling.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/_Lib_GreensockTween/bin/_Lib_GreensockTween.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="/_Lib_Minimalcomps/bin/_Lib_Minimalcomps.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
