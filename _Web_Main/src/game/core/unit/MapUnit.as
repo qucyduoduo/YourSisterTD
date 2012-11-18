@@ -1,4 +1,4 @@
-package game.core.unit.starling
+package game.core.unit
 {
 	import common.utils.QuadNode;
 	import common.utils.QuadTrees;
@@ -17,7 +17,7 @@ package game.core.unit.starling
 	 * 物体视图
 	 * @author noah
 	 */	
-	public class Map3DUnit extends GameUint implements IObjectView
+	public class MapUnit extends GameUint implements IObjectView
 	{
 		/**
 		 * 模型 
@@ -35,10 +35,17 @@ package game.core.unit.starling
 		 * 四叉树引用 
 		 */		
 		protected var _tree:QuadTrees;
+		protected var _couldTick:Boolean;
+		protected var _isPlay:Boolean;
+		protected var _counter:Object;
+		protected var _motionFinishedStop:Boolean;
+		protected var _motionIsFinished:Boolean;
+		protected var _currentFrame:int;
+		protected var _currentFrameRate:Object;
 		/**
 		 * 构造函数
 		 */
-		public function Map3DUnit()
+		public function MapUnit()
 		{
 			super();
 		}
@@ -60,8 +67,8 @@ package game.core.unit.starling
 		override public function update():void
 		{
 			//更新视图坐标`
-			super.x = model.posX;
-			super.y = model.posY;
+			super.x = model.x;
+			super.y = model.y;
 		}
 		/**
 		 * 
@@ -71,23 +78,81 @@ package game.core.unit.starling
 		{
 			this.update();
 			//更新四叉树节点
-			if(tree){
-				var xx:Number;
-				var yy:Number;
-				var str:String;
-				var nodeNew:QuadNode;
-				if (node){
-					if( node.id != model.gridX + "-" + model.gridY){
-						xx = int(model.modX / node.rect.width);
-						yy = int(model.modY / node.rect.height);
-						str = xx + "-" + yy;
-						//trace("[ObjectView3D] "+str);
-						nodeNew = tree.nodes.get(str) as QuadNode;
-						reset(node, nodeNew);
-						node = nodeNew;
-					}
-				}
+//			if(tree){
+//				var xx:Number;
+//				var yy:Number;
+//				var str:String;
+//				var nodeNew:QuadNode;
+//				if (node){
+//					if( node.id != model.gridX + "-" + model.gridY){
+//						xx = int(model.modX / node.rect.width);
+//						yy = int(model.modY / node.rect.height);
+//						str = xx + "-" + yy;
+//						//trace("[ObjectView3D] "+str);
+//						nodeNew = tree.nodes.get(str) as QuadNode;
+//						reset(node, nodeNew);
+//						node = nodeNew;
+//					}
+//				}
+//			}
+		}
+		
+		public function advanceTime( time:Number ):void
+		{
+			if(_couldTick == false || _isPlay == false)
+			{
+				return;
 			}
+			
+			_counter.tick(time);
+			var couldRender:Boolean;
+			while(_counter.expired == true) //判断是否距离上一帧渲染后已经过了多帧
+			{
+				if(checkMotionIsFinished())
+				{
+					if(_motionFinishedStop == true)
+					{
+						if(_motionIsFinished == false)
+						{
+							_motionIsFinished = true;
+							stop();
+//							dispatchEvent(new TPMovieClipEvent(TPMovieClipEvent.MOTION_FINISHED));
+						}
+						return;
+					}
+					
+					_currentFrame = 0;
+				}
+				else
+				{
+					_currentFrame += 1
+				}
+				couldRender = true;
+				_counter.reset(_currentFrameRate);
+			}
+			
+			if(couldRender == true)
+			{
+				updateFrame();
+			}
+		}
+		
+		protected function updateFrame():void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		public function stop():void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		protected function checkMotionIsFinished():Boolean
+		{
+			// TODO Auto Generated method stub
+			return false;
 		}
 		/**
 		 * 

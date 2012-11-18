@@ -6,11 +6,9 @@ package  game.core.models.dynamics
 
 	public class DynamicObjectModel extends StaticObjectModel implements IDynamicObjectModel
 	{
-		public var speed:Number;
-		public var currentDir:uint;
-		public var weight:uint = 3;	//与墙壁的间隙距离
-		public var oldModX:Number;
-		public var oldModY:Number;
+		private var _speed:Number;
+		private var _oldX:Number;
+		private var _oldY:Number;
 		
 		public function DynamicObjectModel()
 		{
@@ -22,67 +20,49 @@ package  game.core.models.dynamics
 		 */		
 		public function move( mapModel:IMapModel ):void
 		{
-			if(dir > 8){
-				//1下 2右下 3右 4右上 5上 6左上 7左 8左下
-				oldModX = modX;
-				oldModY = modY;
-				if(dir == 8 + 1){
-				} else if(dir == 8 + 2){
-					modX += 0.7 * speed;
-				} else if(dir == 8 + 3){
-					modX += 1 * speed;
-				} else if(dir == 8 + 4){
-					modX += 0.7 * speed;
-				} else if(dir == 8 + 5){
-				} else if(dir == 8 + 6){
-					modX -= 0.7 * speed;
-				} else if(dir == 8 + 7){
-					modX -= 1 * speed;
-				} else if(dir == 8 + 8){
-					modX -= 0.7 * speed;
-				}
-				onHitTestX( mapModel );
-				
-				if(dir == 8 + 1){
-					modY += 1 * speed;
-				} else if(dir == 8 + 2){
-					modY += 0.7 * speed;
-				} else if(dir == 8 + 3){
-				} else if(dir == 8 + 4){
-					modY -= 0.7 * speed;
-				} else if(dir == 8 + 5){
-					modY -= 1 * speed;
-				} else if(dir == 8 + 6){
-					modY -= 0.7 * speed;
-				} else if(dir == 8 + 7){
-				} else if(dir == 8 + 8){
-					modY += 0.7 * speed;
-				} 
-				onHitTestY( mapModel );
-				oldDir = dir;
-			} else {
-				if(oldDir != dir){
-					oldDir = dir;
-				}
-			}
-		}
-		/**
-		 * 如果碰撞倒退
-		 */		
-		protected function onHitTestX( mapModel:IMapModel ):void{
-			
-			if( mapModel.onHitTestGrid( this ) ){
-				modX = oldModX
-			} 
-		}
-		/**
-		 * 如果碰撞倒退
-		 */		
-		protected function onHitTestY( mapModel:IMapModel ):void{
-			
-			if( mapModel.onHitTestGrid( this )){
-				modY = oldModY;
-			} 
+//			if(dir > 8){
+//				//1下 2右下 3右 4右上 5上 6左上 7左 8左下
+//				_oldX = x;
+//				_oldY = y;
+//				if(dir == 8 + 1){
+//				} else if(dir == 8 + 2){
+//					x += 0.7 * _speed;
+//				} else if(dir == 8 + 3){
+//					x += 1 * _speed;
+//				} else if(dir == 8 + 4){
+//					x += 0.7 * _speed;
+//				} else if(dir == 8 + 5){
+//				} else if(dir == 8 + 6){
+//					x -= 0.7 * _speed;
+//				} else if(dir == 8 + 7){
+//					x -= 1 * _speed;
+//				} else if(dir == 8 + 8){
+//					x -= 0.7 * _speed;
+//				}
+//				onHitTestX( mapModel );
+//				
+//				if(dir == 8 + 1){
+//					y += 1 * _speed;
+//				} else if(dir == 8 + 2){
+//					y += 0.7 * _speed;
+//				} else if(dir == 8 + 3){
+//				} else if(dir == 8 + 4){
+//					y -= 0.7 * _speed;
+//				} else if(dir == 8 + 5){
+//					y -= 1 * _speed;
+//				} else if(dir == 8 + 6){
+//					y -= 0.7 * _speed;
+//				} else if(dir == 8 + 7){
+//				} else if(dir == 8 + 8){
+//					y += 0.7 * _speed;
+//				} 
+//				onHitTestY( mapModel );
+//				_oldDir = dir;
+//			} else {
+//				if(_oldDir != dir){
+//					_oldDir = dir;
+//				}
+//			}
 		}
 	}
 }

@@ -1,11 +1,10 @@
-package game.core.unit.starling
+package game.core.unit
 {
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
 	import flashx.textLayout.formats.TextAlign;
 	
-	import game.app.managers.DepthMgr;
 	import game.base.models.ObjectModel;
 	import game.core.controllers.dynamics.MonsterController;
 	import game.core.events.ActionEvent;
@@ -14,12 +13,10 @@ package game.core.unit.starling
 	import game.core.models.dynamics.MonsterModel;
 	import game.core.models.statics.MapModel;
 	
-	import starling.core.Starling;
-	import starling.display.MovieClip;
 	import starling.display.Quad;
 	import starling.textures.TextureAtlas;
 	
-	public class Enemy3DUnit extends Map3DUnit
+	public class EnemyUnit extends MapUnit
 	{
 		private var _model:MonsterModel;
 		private var _controller:MonsterController;
@@ -39,7 +36,7 @@ package game.core.unit.starling
 			return this._model as ObjectModel;
 		}
 		
-		public function Enemy3DUnit()
+		public function EnemyUnit()
 		{
 			super();
 		}
@@ -54,14 +51,12 @@ package game.core.unit.starling
 			_controller = new MonsterController();
 			_controller.init(_model);
 			
-			_model.modX = data[1] * MapModel.BLOCK_WIDTH;
-			_model.modY = data[2] * MapModel.BLOCK_WIDTH;
+			_model.x = data[1] * MapModel.BLOCK_WIDTH;
+			_model.y = data[2] * MapModel.BLOCK_WIDTH;
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
-			_model.speed = 3;
+//			_model.speed = 3;
 			
 			create( data[0] );
-			
-			_model.getPos( 1 );
 		}
 		private var q:Quad;
 		
@@ -70,7 +65,9 @@ package game.core.unit.starling
 			var tf:TextFormat = new TextFormat("宋体", 14, 0xffffff);
 			tf.align = TextAlign.CENTER;
 			var testParam:uint = data as uint;
-			q = new Quad(4,4,0x00ff00);
+			q = new Quad(3,3,0x00ff00);
+			q.x = -1;
+			q.y = -1;
 			this.addChild(q);
 			modelTypeID = testParam - 1;
 		}
@@ -93,13 +90,10 @@ package game.core.unit.starling
 		}
 		
 		public function draw():void{
-			if(_model.currentDir != _model.dir){
-				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
-				_model.currentDir = _model.dir;
-			}
-			if(this.parent){
-				DepthMgr.swapDepth(this, model.posY);
-			}
+//			if(_model.currentDir != _model.dir){
+//				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
+//				_model.currentDir = _model.dir;
+//			}
 		}
 	}
 }

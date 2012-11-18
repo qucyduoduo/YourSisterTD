@@ -1,4 +1,4 @@
-package  game.core.unit.starling
+package  game.core.unit
 {
 	import flash.events.Event;
 	
@@ -14,7 +14,7 @@ package  game.core.unit.starling
 	 * 人物视图
 	 * @author noah
 	 */
-	public class Character3DUint extends DynamicMap3DUnit implements IPeopleView
+	public class CharacterUint extends DynamicMapUnit implements IPeopleView
 	{
 		private var _model:PeopleModel;
 		private var _controller:PeopleController;
@@ -29,29 +29,31 @@ package  game.core.unit.starling
 			return this._model;
 		}
 		
-		public function Character3DUint()
+		public function CharacterUint()
 		{
 			super();
 		}
 		
-		protected function onAttackHandler(e:ActionEvent):void{
-			draw();
+		protected function onAttackHandler(e:ActionEvent):void
+		{
 		}
 		
-		override public function init( data:Object = null):void{
+		override public function init( data:Object = null):void
+		{
 			_model = new PeopleModel();
 			_model.addEventListener( ActionEvent.ATTACK, onAttackHandler);
 			_controller = new PeopleController();
 			_controller.init(_model);
 			
-			_model.modX = data[1] * MapModel.BLOCK_WIDTH;
-			_model.modY = data[2] * MapModel.BLOCK_WIDTH;
+			_model.x = data[1] * MapModel.BLOCK_WIDTH;
+			_model.y = data[2] * MapModel.BLOCK_WIDTH;
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
-			_model.speed = data[3];
+//			_model.speed = data[3];
 			
 			create( data[0] );
 			
-			_model.getPos( 1 );
+			this.x = _model.x;
+			this.y = _model.y;
 		}
 		
 		protected function onDirChangeHandler(event:Event):void
@@ -61,26 +63,25 @@ package  game.core.unit.starling
 		
 		override public function onUpdateHandler(event:Event):void {
 			super.onUpdateHandler(event);
-			draw();
 		}
 		
-		override public function draw():void{
-			
-			if(_model.isGCD){
-				if( isAniPlaying ){
-					return;
-				}
-				isAniPlaying = true;
-			} else {
-				isAniPlaying = false;
-			}
-			
-			if(_model.currentDir != _model.dir){
-				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
-				_model.currentDir = _model.dir;
-			}
-			super.draw();
-		}
+//		override public function draw():void{
+//			
+//			if(_model.isGCD){
+//				if( isAniPlaying ){
+//					return;
+//				}
+//				isAniPlaying = true;
+//			} else {
+//				isAniPlaying = false;
+//			}
+//			
+////			if(_model.currentDir != _model.dir){
+////				//trace("[PeopleView3D] dir" + _model.currentDir, _model.dir);
+////				_model.currentDir = _model.dir;
+////			}
+//			super.draw();
+//		}
 		/**
 		 * 
 		 * @param e

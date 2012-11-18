@@ -4,7 +4,9 @@ package  game.core.interfaces
 	
 	import flash.events.Event;
 	
-	public interface IObjectView extends INode
+	import starling.animation.IAnimatable;
+	
+	public interface IObjectView extends INode,IAnimatable
 	{
 		/**
 		* 更新当前视图的视图坐标和四叉树节点数据

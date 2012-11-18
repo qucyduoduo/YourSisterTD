@@ -2,16 +2,14 @@ package game.starling
 {
 	import common.base.views.starling.BaseView;
 	
+	import flash.display.DisplayObject;
+	
 	import game.app.managers.KeyBoardMgr;
 	import game.core.interfaces.IMapView;
 	import game.core.map.Map;
-	import game.core.map.Tile25Map;
-	import game.core.map.TileMap;
-	import game.core.unit.starling.Character3DUint;
-	import game.core.unit.starling.Enemy3DUnit;
-	import game.core.unit.starling.TileCharacter3DUnit;
-	import game.core.unit.starling.TileEnemy3DUnit;
-	import game.untils.MapLoader;
+	import game.core.unit.CharacterUint;
+	import game.core.unit.EnemyUnit;
+	import game.core.unit.TileCharacterUnit;
 	import game.untils.MgrObjects;
 	
 	import starling.core.Starling;
@@ -28,19 +26,19 @@ package game.starling
 		/**
 		 * 
 		 */		
-		private var characterUnit:Character3DUint;
+		private var _characterUnit:CharacterUint;
 		/**
 		 * 
 		 */		
-		private var enemyUnit:Enemy3DUnit;
+		private var _enemyUnit:EnemyUnit;
 		/**
 		 * 
 		 */		
-		private var enemyUnitArr:Array;
+		private var _enemyUnitArr:Array;
 		/**
 		 *  
 		 */		
-		private var map:IMapView;
+		private var _map:IMapView;
 		/**
 		 * 
 		 */		
@@ -71,65 +69,61 @@ package game.starling
 			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
 			
 //			MgrObjects.uiMgr.init(();
-			MapLoader.load( onMapJsonLoadCompleteHandler );
+			MgrObjects.mapMgr.loadMap( onMapJsonLoadCompleteHandler );
 		}
 		
 		private function onMapJsonLoadCompleteHandler( str:Object ):void{
 			
-			//1 平面 ，2斜角，3TIle斜角
+			//1 平面 ，2斜角
 			GAME_MODE = 1;
 			
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)
 			{
-				map = new Map();
+				_map = new Map();
 			}
 			else if(GAME_MODE == 2)
 			{
-				map = new TileMap();
+//				map = new TileMap();
+				return;
 			} 
-			else if(GAME_MODE == 3)
-			{
-				map = new Tile25Map();
-			}
 			
-			stage.addChild( map as BaseView);
-			map.init( strMapData["mapdata"] );
+			stage.addChild( _map as BaseView );
+			_map.init( strMapData["mapdata"] );
 			
 			if(GAME_MODE == 1)
 			{
-				characterUnit = new Character3DUint();
+//				_characterUnit = new CharacterUint();
 			}
 			else if(GAME_MODE == 2 || GAME_MODE == 3)
 			{
-				characterUnit = new TileCharacter3DUnit();
+//				characterUnit = new TileCharacterUnit();
 			}
-			characterUnit.init( [1,8,5,4] );
-			characterUnit.draw();
-			map.addPlayer( characterUnit );
+//			_characterUnit.init( [1,8,5,4] );
+//			_map.addPlayer( _characterUnit );
 			
-			enemyUnitArr = [];
+//			_enemyUnitArr = [];
 			
-			for(var i:uint=4;i<8;i++)
-			{
-				for(var j:uint=4;j<8;j++)
-				{
-					if(GAME_MODE == 1)
-					{
-						enemyUnit = new Enemy3DUnit();
-					}
-					else if(GAME_MODE == 2 || GAME_MODE == 3)
-					{
-						enemyUnit = new TileEnemy3DUnit();
-					}
-					enemyUnitArr.push(enemyUnit);
-					enemyUnit.init( [3,j,i] );
-					enemyUnit.draw();
-					map.addMonster( enemyUnit );
-				}
-			}
+//			for(var i:uint=4;i<8;i++)
+//			{
+//				for(var j:uint=4;j<8;j++)
+//				{
+//					if(GAME_MODE == 1)
+//					{
+//						enemyUnit = new EnemyUnit();
+//					}
+//					else if(GAME_MODE == 2 || GAME_MODE == 3)
+//					{
+//						enemyUnit = new TileEnemyUnit();
+//					}
+//					enemyUnitArr.push(enemyUnit);
+//					enemyUnit.init( [3,j,i] );
+//					enemyUnit.draw();
+//					map.addMonster( enemyUnit );
+//				}
+//			}
 			
-			KeyBoardMgr.instance.init( MgrObjects.displayMgr.getStage );;
+//			KeyBoardMgr.instance.init( MgrObjects.displayMgr.getStage );;
 		}
 		
 		/**
@@ -137,20 +131,29 @@ package game.starling
 		 * 1下 2右下 3右 4右上 5上 6左上 7左 8左下
 		 * @param e
 		 */			
-		private function onEnterFrame(e:EnterFrameEvent):void{
-			
-			if( characterUnit )
-			{
-				characterUnit.onInputHandler( map );
-			}
-			for each(enemyUnit in enemyUnitArr)
-			{
-				if(enemyUnit)
-				{
-					enemyUnit.onInputHandler( map );
-				}
-			}
+		private function onEnterFrame(e:EnterFrameEvent):void
+		{
+//			if(_map)
+//			{
+//				(_map as BaseView).sortChildren( sortFunction );
+//			}
+//			if( characterUnit )
+//			{
+//				characterUnit.onInputHandler( map );
+//			}
+//			for each(enemyUnit in enemyUnitArr)
+//			{
+//				if(enemyUnit)
+//				{
+//					enemyUnit.onInputHandler( map );
+//				}
+//			}
 		}
+		
+//		private function sortFunction( objA:DisplayObject, objB:DisplayObject ):Number
+//		{
+//			return (objA.y*2560+objA.x)-(objB.y*2560+objB.x);
+//		}
 		private function onRemovedFromStage(event:Event):void
 		{
 			//stage.removeEventListener(TouchEvent.TOUCH, onTouch);

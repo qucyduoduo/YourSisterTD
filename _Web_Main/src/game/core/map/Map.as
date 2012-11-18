@@ -4,10 +4,11 @@ package game.core.map
 	import common.utils.QuadNode;
 	import common.utils.QuadTrees;
 	
+	import flash.display.BitmapData;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import game.app.managers.DepthMgr;
 	import game.base.views.GameUint;
 	import game.core.interfaces.IMapModel;
 	import game.core.interfaces.IMapView;
@@ -16,15 +17,23 @@ package game.core.map
 	import game.untils.MgrObjects;
 	
 	import starling.animation.IAnimatable;
+	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.textures.RenderTexture;
+	import starling.textures.Texture;
 	
 	public class Map extends GameUint  implements IMapView, IAnimatable
 	{
+		/**
+		 * 当没有贴图时使用的贴图 
+		 */        
+		protected static const NULL_TEXTURE:Texture = Texture.fromBitmapData(new BitmapData(1,1,true,0));
+		
 		protected var _objTree:QuadTrees;
 		/**
 		 * 地面层 
 		 */		
-		protected var _groundLevel:Sprite;
+		protected var _groundLevel:Image;
 		/**
 		 * 容器层 (排序)
 		 */		
@@ -36,7 +45,7 @@ package game.core.map
 		
 		protected var _model:IMapModel;
 		
-		public function get groundLevel():Sprite
+		public function get groundLevel():Image
 		{
 			return this._groundLevel;
 		}
@@ -79,10 +88,10 @@ package game.core.map
 			super();
 			_airLevel = new Sprite();
 			_contentLevel = new Sprite();
-			_groundLevel = new Sprite();
-			this.addChild(_groundLevel);
-			this.addChild(_contentLevel);
-			this.addChild(_airLevel);
+			_groundLevel = new Image( NULL_TEXTURE );
+			addChild(_groundLevel);
+			addChild(_contentLevel);
+			addChild(_airLevel);
 		}
 		
 		public function advanceTime(time:Number):void
@@ -93,33 +102,55 @@ package game.core.map
 		override public function init( data:Object = null):void 
 		{
 			_model = new MapModel( data );
-			objTree = new QuadTrees( 3 , new Rectangle(0,0, 512 , 512));
-			var len:uint =  _model.dataArr.length;
-			for (var j:uint = 0;j<len;j++)
+			objTree = new QuadTrees( 3 , new Rectangle(0,0, 960 , 640));
+			drawMapBlocks();
+		}
+		
+		private function drawMapBlocks():void
+		{
+			var type:int;
+			for (var j:uint = 0;j<MapModel.MAP_HEIGHT;j++)
 			{
-				for (var i:uint = 0;i<len;i++)
+				for (var i:uint = 0;i<MapModel.MAP_WIDTH;i++)
 				{
-					drawBlock( _model.dataArr[j][i],i,j );
+					type =  _model.dataList[ j* MapModel.MAP_WIDTH + i ];
+					if( type )
+					{
+						drawContentBlock(  i, j );
+					}
+					else
+					{
+						drawGroundBlock( i, j );
+					}
 				}
 			}
-			DepthMgr.swapDepthAll(this._contentLevel, "y");
+			drawMapGroundLevel();
 		}
-		/**
-		 * 绘制单元格
-		 * @param num
-		 * @param _x
-		 * @param _y
-		 */		
-		protected function drawBlock( type:uint, x:uint, y:uint):void 
+		
+		private function drawContentBlock( x:uint, y:uint):void
 		{
-			var block:MapBlock = MgrObjects.mapMgr.getMapBlock( type, x, y );
-			if(type > 0)
-			{
-				_contentLevel.addChild( block );
-			} else {
-				_groundLevel.addChild( block );
-			}
+			var block:MapBlock = MgrObjects.mapMgr.getMapBlock( 1, x, y );
+			_contentLevel.addChild( block );
 			objTree.insertObj(block);
+		}
+		
+		private var _renderTexutre:RenderTexture;
+		
+		private function drawGroundBlock( x:uint, y:uint ):void
+		{
+			if(!_renderTexutre)
+			{
+				_renderTexutre = new RenderTexture( 960, 640 );
+			}
+			var matrix:Matrix = new Matrix();
+			matrix.translate( x * MapModel.BLOCK_WIDTH, y * MapModel.BLOCK_WIDTH);
+			_renderTexutre.draw( MgrObjects.mapMgr.getMapBlock( 0, x, y ).image, matrix );
+		}
+
+		private function drawMapGroundLevel():void
+		{
+			_groundLevel.texture = _renderTexutre;
+			_groundLevel.readjustSize();
 		}
 		/**
 		 * 添加怪物

@@ -1,15 +1,16 @@
 package common.utils
 {
+	import common.utils.interfaces.INode;
+	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
-	import common.utils.interfaces.INode;
 
 	/**
 	 * 四叉树 
 	 */	
-	public class QuadTrees {
+	public class QuadTrees 
+	{
 		//四叉树的层数
 		private var _layerNum:int = 0;
 		//最大的范围
@@ -26,7 +27,8 @@ package common.utils
 		 * @param layerNum 四叉树的层数
 		 * @param maxRect 最大的范围
 		 */		
-		public function QuadTrees( layerNum:int , maxRect:Rectangle ) {
+		public function QuadTrees( layerNum:int , maxRect:Rectangle ) 
+		{
 			this._layerNum = layerNum+1 ; //四叉树的层数
 			nodes = new HashMap();
 			_maxRect = maxRect ;
@@ -41,8 +43,10 @@ package common.utils
 		 * 初始化树
 		 * @node 树节点
 		 */
-		private function initTree( node:QuadNode):void {
-			if(node==null || node.rect.width<=this._maxRect.width/Math.pow(2,_layerNum ) || node.rect.height<=this._maxRect.height/Math.pow(2,_layerNum ) ){
+		private function initTree( node:QuadNode):void 
+		{
+			if(node==null || node.rect.width<=this._maxRect.width/Math.pow(2,_layerNum ) || node.rect.height<=this._maxRect.height/Math.pow(2,_layerNum ) )
+			{
 				var key:String = node.rect.x/node.rect.width + "-" + node.rect.y/node.rect.height;
 				nodes.put(key,node);
 				node.hasSon = false ;
@@ -50,7 +54,8 @@ package common.utils
 			}
 			_nodeList.push( node );
 			//设置子节点
-			for( var i:int=0; i<node.sonNodeList.length; ++i){
+			for( var i:int=0; i<node.sonNodeList.length; ++i)
+			{
 				node.sonNodeList[i]= new QuadNode();
 				node.sonNodeList[i].parentNode = node; 
 				node.sonNodeList[i].rect = new Rectangle( node.rect.x + (i % 2) * node.rect.width*0.5, node.rect.y + int( i > 1) * node.rect.height*0.5, node.rect.width*0.5, node.rect.height*0.5);
@@ -61,8 +66,9 @@ package common.utils
 		 * 添加可视对象到树中 
 		 * @param obj 类型为DisplayObjects
 		 */		
-		public function insertObj( obj:INode ):void {
-			var sonNode:QuadNode = searchNodeByPoint(new Point(obj.model.modX, obj.model.modY) , _mainNode );
+		public function insertObj( obj:INode ):void 
+		{
+			var sonNode:QuadNode = searchNodeByPoint(new Point(obj.model.x, obj.model.y) , _mainNode );
 			sonNode.objVec.push( obj );
 			obj.node = sonNode;
 			obj.tree = this;
@@ -71,7 +77,8 @@ package common.utils
 		 * 从树中删除对象 
 		 * @param obj
 		 */		
-		public function deleteObj(obj:INode):void {
+		public function deleteObj(obj:INode):void 
+		{
 			var sonNode:QuadNode = searchNodeByPoint(new Point(obj.model.modX,obj.model.modY) , _mainNode );
 			for(var i:int = 0;i<sonNode.objVec.length ; i++){                 
 				if(sonNode.objVec[i]==obj){                     
@@ -86,22 +93,28 @@ package common.utils
 		 * @param rect 范围
 		 * @param tempNode
 		 */		
-		private function queryAndAdd(objVec:Vector.<INode>,rect:Rectangle ,  tempNode:QuadNode ,exact:Boolean ):void{
+		private function queryAndAdd(objVec:Vector.<INode>,rect:Rectangle ,  tempNode:QuadNode ,exact:Boolean ):void
+		{
 			//如果没有交集，则返回
-			if(!rect.intersects(tempNode.rect)){
+			if(!rect.intersects(tempNode.rect))
+			{
 				return;
 			}
 			//判断是否有儿子节点，递归找儿子
-			if(tempNode.hasSon){
+			if(tempNode.hasSon)
+			{
 				//遍历儿子节点
 				for each(var son:QuadNode in tempNode.sonNodeList){
 					if(son.rect.intersects(rect)){ 
 						queryAndAdd(objVec,rect, son ,exact);
 					}
 				}
-			}else{
+			}
+			else
+			{
 				//如果是最后的节点，则把里面的对象加入数组中
-				for each(var obj:INode in tempNode.objVec){
+				for each(var obj:INode in tempNode.objVec)
+				{
 					if(exact){
 						var sonRect:Rectangle = new Rectangle(obj.model.modX,obj.model.modY,DisplayObject(obj).width,DisplayObject(obj).height) ;
 						if(sonRect.intersects(rect)){
@@ -118,12 +131,17 @@ package common.utils
 		 * @param point
 		 * @return 
 		 */		
-		private function searchNodeByPoint( point:Point ,node:QuadNode ):QuadNode{
-			if(node.hasSon){
-				if(node.checkPointIsIn(point)){
+		private function searchNodeByPoint( point:Point ,node:QuadNode ):QuadNode
+		{
+			if(node.hasSon)
+			{
+				if(node.checkPointIsIn(point))
+				{
 					//遍历儿子节点
-					for each(var son:QuadNode in node.sonNodeList){
-						if(son.checkPointIsIn(point )){ 
+					for each(var son:QuadNode in node.sonNodeList)
+					{
+						if(son.checkPointIsIn(point ))
+						{
 							node = searchNodeByPoint( point , son );
 						}
 					}
@@ -134,8 +152,10 @@ package common.utils
 		/**
 		 * 从四叉树中移除所有 
 		 */		
-		public function removeAll():void {
-			for each( var node:QuadNode in _nodeList) {
+		public function removeAll():void 
+		{
+			for each( var node:QuadNode in _nodeList) 
+			{
 				node.dispose() ;
 			}
 		}

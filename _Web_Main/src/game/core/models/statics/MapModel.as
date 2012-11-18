@@ -8,17 +8,17 @@ package  game.core.models.statics
 	 */	
 	public class MapModel extends StaticObjectModel implements IMapModel
 	{
+		public static const MAP_WIDTH:int = 30;
+		public static const MAP_HEIGHT:int = 20;
+		
 		public static const TILE_BLOCK_WIDTH:uint = 32;
 		public static const BLOCK_WIDTH:uint = 32;
-		public static const STAGE_WIDTH:uint = 800;
-		public static const STAGE_HEIDHT:uint = 600;
 		
-		private var _dataArr:Array;
-		public function get dataArr():Array{
-			return this._dataArr;
-		}
-		public function set dataArr(value:Array):void{
-			this._dataArr = value;
+		private var _dataList:Vector.<int>;
+		
+		public function get dataList():Vector.<int>
+		{
+			return this._dataList;
 		}
 		/**
 		 * 构造函数
@@ -29,27 +29,16 @@ package  game.core.models.statics
 		{
 			super();
 			
-			if(data){
+			if(data)
+			{
 				var dataObj:Object =  data;
-				dataArr = dataObj as Array;
-			}
-		}
-		
-		public function onHitTestGrid(model:*):Boolean
-		{
-			if( dataArr[model.gridY][model.gridX] > 0){
-				return true;
-			} else {
-				var gridXs:Array = model.gridXs;
-				var gridYs:Array = model.gridYs;
-				//trace("[MapModel]" + gridXs[0],gridXs[1]);
-				if(dataArr[model.gridY][gridXs[0]] > 0 || dataArr[model.gridY][gridXs[1]] > 0){
-					return true;
+				var dataArr:Array = dataObj as Array;
+				_dataList = new Vector.<int>();
+				var iLen:int = dataArr.length;
+				for(var i:int; i<iLen; i++)
+				{
+					_dataList.push( dataArr[i] );
 				}
-				if(dataArr[gridYs[0]][model.gridX] > 0 || dataArr[gridYs[1]][model.gridX] > 0){
-					return true;
-				}
-				return false;
 			}
 		}
 	}

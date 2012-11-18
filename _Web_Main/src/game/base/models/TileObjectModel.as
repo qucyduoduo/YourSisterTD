@@ -24,41 +24,23 @@ package  game.base.models
 			super();
 			objectModel = new ObjectModel();
 		}
-		public function get hitRect():Rectangle{
-			return objectModel.hitRect;
-		}
-		public function set hitRect(value:Rectangle):void{
-			objectModel.hitRect = value;
-		}
-		public function set modX(value:Number):void{
-			if(objectModel.modX != value){
-				objectModel.modX = value;
+		public function set x(value:Number):void{
+			if(objectModel.x != value){
+				objectModel.x = value;
 				dispatchEvent(new ModelEvent(ModelEvent.UPDATE));
 			}
 		}
-		public function get modX():Number{
-			return objectModel.modX;
+		public function get x():Number{
+			return objectModel.x;
 		}
-		public function set modY(value:Number):void{
-			if(objectModel.modY != value){
-				objectModel.modY = value;
+		public function set y(value:Number):void{
+			if(objectModel.y != value){
+				objectModel.y = value;
 				dispatchEvent(new ModelEvent(ModelEvent.UPDATE));
 			}
 		}
-		public function get modY():Number{
-			return objectModel.modY;
-		}
-		public function get gridXs():Array{
-			return objectModel.gridXs;
-		}
-		public function get gridYs():Array{
-			return objectModel.gridYs;
-		}
-		public function get gridX():uint{
-			return objectModel.gridX;
-		}
-		public function get gridY():uint{
-			return objectModel.gridY;
+		public function get y():Number{
+			return objectModel.y;
 		}
 		public function set dir(value:uint):void{
 			objectModel.dir = value;
@@ -70,12 +52,6 @@ package  game.base.models
 		public function get dir():uint{
 			return objectModel.dir;
 		}
-		public function set oldDir(value:uint):void{
-			objectModel.oldDir = value;
-		}
-		public function get oldDir():uint{
-			return objectModel.oldDir;
-		}
 		public function get posX():Number{
 			var ppp:Point = tileXY( new Point(objectModel.modX, objectModel.modY));
 			return ppp.x + PADDING_LEFT;
@@ -84,25 +60,23 @@ package  game.base.models
 			var ppp:Point = tileXY( new Point(objectModel.modX, objectModel.modY));
 			return ppp.y;
 		}
-		public function tileXY( p:Point ):Point{
-			return TileObjectModel.tileXY( p );
-		}
-		public static function tileXY( p:Point ):Point{
-			var pp:Point;
-			pp = p;
-			//旋转
-			pp = pointMatrix(p, Math.cos(R45), Math.sin(R45), -Math.sin(R45), Math.cos(R45));
-			//拉升x
-			pp = pointMatrix( pp, 1.4, 0, 0, 0.7);
-			//平移
-			//pp = pointMatrix(pp, 0, 0, (3 - Math.SQRT2) * MapModel.BLOCK_WIDTH >> 1, 0);
-			return pp;
-		}
-		public static function pointMatrix(p:Point, a:Number = 1, b:Number = 0, c:Number = 0, d:Number = 1, tx:Number = 0, ty:Number = 0):Point{
-			
-			var xx:Number = p.x * a + p.y * c;
-			var yy:Number = p.x * b + p.y * d;
-			return new Point(xx,yy);
-		}
+//		public static function tileXY( p:Point ):Point
+//		{
+//			var pp:Point;
+//			pp = p;
+//			//旋转
+//			pp = pointMatrix(p, Math.cos(R45), Math.sin(R45), -Math.sin(R45), Math.cos(R45));
+//			//拉升x
+//			pp = pointMatrix( pp, 1.4, 0, 0, 0.7);
+//			//平移
+//			//pp = pointMatrix(pp, 0, 0, (3 - Math.SQRT2) * MapModel.BLOCK_WIDTH >> 1, 0);
+//			return pp;
+//		}
+//		public static function pointMatrix(p:Point, a:Number = 1, b:Number = 0, c:Number = 0, d:Number = 1, tx:Number = 0, ty:Number = 0):Point
+//		{
+//			var xx:Number = p.x * a + p.y * c;
+//			var yy:Number = p.x * b + p.y * d;
+//			return new Point(xx,yy);
+//		}
 	}
 }

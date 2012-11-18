@@ -19,17 +19,9 @@ package  game.core.models.statics
 		 * 2 = 45度视角
 		 * @return 
 		 */		
-		public function getPos(type:uint):Point{
-			
-			if(type == 1){
-				modX = ( gridX + 1) * MapModel.BLOCK_WIDTH - (MapModel.BLOCK_WIDTH >> 1);
-				modY = ( gridY + 1) * MapModel.BLOCK_WIDTH - (MapModel.BLOCK_WIDTH >> 1);
-				return new Point( modX, modY);
-			} else {
-				modX = ( gridX + 1) * MapModel.BLOCK_WIDTH - (MapModel.BLOCK_WIDTH >> 1);
-				modY = ( gridY + 1) * MapModel.BLOCK_WIDTH - (MapModel.BLOCK_WIDTH >> 1);
-				return new Point( modX, modY);
-			}
+		public function getPos():Point
+		{
+			return new Point( x, y);
 		}
 	}
 }

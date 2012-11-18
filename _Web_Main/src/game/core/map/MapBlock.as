@@ -4,19 +4,25 @@ package game.core.map
 	import game.core.models.statics.BlockModel;
 	import game.core.models.statics.MapModel;
 	import game.core.statics.BlockController;
-	import game.core.unit.starling.StaticMap3DUnit;
+	import game.core.unit.StaticMapUnit;
 	
 	import starling.display.Image;
+	import starling.textures.Texture;
 
 	/**
 	 * 2D地图格子视图
 	 * @author noah
 	 */	
-	public class MapBlock extends StaticMap3DUnit
+	public class MapBlock extends StaticMapUnit
 	{
 		private var _model:BlockModel;
 		private var _controller:BlockController;
 		private var _image:Image;
+		
+		public function get image():Image
+		{
+			return _image;
+		}
 		/**
 		 * 
 		 * @return 
@@ -32,32 +38,29 @@ package game.core.map
 		 * @param _x
 		 * @param _y
 		 */	
-		public function MapBlock()
+		public function MapBlock( type:int, x:int, y:int, texture:Texture )
 		{
 			super();
-		}
-		
-		override public function init( data:Object = null):void 
-		{
 			_model = new BlockModel();
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
 			_controller = new BlockController();
 			_controller.init(_model);
 			
-			_model.num = data[0];
+			_model.type = type;
 			
-			_image = new Image( data[3] );
-			
+			_image = new Image( texture );
 			addChild( _image );
 			
-			_model.modX = data[1] * MapModel.BLOCK_WIDTH;
-			_model.modY = data[2] * MapModel.BLOCK_WIDTH;
+			_model.x= x * MapModel.BLOCK_WIDTH;
+			_model.y = y * MapModel.BLOCK_WIDTH;
+			
+			this.x = _model.x;
+			this.y = _model.y;
 		}
 		
 		public function clone( type:int, x:int, y:int):MapBlock
 		{
-			var clone:MapBlock = new MapBlock();
-			clone.init( [ type, x, y, _image.texture ] ) 
+			var clone:MapBlock = new MapBlock( type, x, y, _image.texture );
 			return clone;
 		}
 	}
