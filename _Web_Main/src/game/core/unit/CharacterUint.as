@@ -2,66 +2,52 @@ package  game.core.unit
 {
 	import flash.events.Event;
 	
-	import game.core.controllers.dynamics.PeopleController;
+	import game.base.units.DynamicMapUnit;
+	import game.core.controllers.dynamics.CharacterController;
 	import game.core.events.ActionEvent;
 	import game.core.events.ModelEvent;
-	import game.core.interfaces.IMapView;
-	import game.core.interfaces.IPeopleView;
-	import game.core.models.dynamics.PeopleModel;
+	import game.core.interfaces.model.ICharacterModel;
+	import game.core.interfaces.view.ICharacterView;
+	import game.core.models.dynamics.CharacterModel;
 	import game.core.models.statics.MapModel;
 	
 	/**
 	 * 人物视图
 	 * @author noah
 	 */
-	public class CharacterUint extends DynamicMapUnit implements IPeopleView
+	public class CharacterUint extends DynamicMapUnit implements ICharacterView
 	{
-		private var _model:PeopleModel;
-		private var _controller:PeopleController;
-		
-		private function get controller():PeopleController
+		public function get characterModel():ICharacterModel
 		{
-			return _controller;
+			return _model as ICharacterModel;
+		}
+		public function CharacterUint( x:int, y:int, speed:Number )
+		{
+			super( x, y );
+			initParams["speed"] = speed;
 		}
 		
-		override public function get model():*
+		override public function init():void
 		{
-			return this._model;
-		}
-		
-		public function CharacterUint()
-		{
-			super();
+			_model = new CharacterModel();
+			_model.addEventListener( ActionEvent.ATTACK, onAttackHandler);
+			_controller = new CharacterController();
+			_controller.init(_model);
+			
+			_model.x = initParams["x"] * MapModel.BLOCK_WIDTH;
+			_model.y = initParams["y"] * MapModel.BLOCK_WIDTH;
+			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
+			characterModel.speed = initParams["speed"];
+			setPosPoint();
+			update();
 		}
 		
 		protected function onAttackHandler(e:ActionEvent):void
 		{
 		}
 		
-		override public function init( data:Object = null):void
+		override public function onUpdateHandler(event:Event):void 
 		{
-			_model = new PeopleModel();
-			_model.addEventListener( ActionEvent.ATTACK, onAttackHandler);
-			_controller = new PeopleController();
-			_controller.init(_model);
-			
-			_model.x = data[1] * MapModel.BLOCK_WIDTH;
-			_model.y = data[2] * MapModel.BLOCK_WIDTH;
-			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
-//			_model.speed = data[3];
-			
-			create( data[0] );
-			
-			this.x = _model.x;
-			this.y = _model.y;
-		}
-		
-		protected function onDirChangeHandler(event:Event):void
-		{
-			// TODO Auto-generated method stub
-		}
-		
-		override public function onUpdateHandler(event:Event):void {
 			super.onUpdateHandler(event);
 		}
 		
@@ -82,16 +68,5 @@ package  game.core.unit
 ////			}
 //			super.draw();
 //		}
-		/**
-		 * 
-		 * @param e
-		 */		
-		public function onInputHandler( map:IMapView ):void {
-			
-			if(currentMap != map){
-				currentMap = map;
-			}
-			controller.onInputHandler( map );
-		}
 	}
 }

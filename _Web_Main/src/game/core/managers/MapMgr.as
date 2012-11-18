@@ -6,7 +6,7 @@ package game.core.managers
 	import flash.display.Shape;
 	import flash.events.EventDispatcher;
 	
-	import game.core.map.MapBlock;
+	import game.core.map.MapBlockView;
 	import game.core.models.statics.MapModel;
 	import game.untils.MapLoader;
 	
@@ -19,13 +19,13 @@ package game.core.managers
 	 */	
 	public class MapMgr extends EventDispatcher implements IMgr
 	{
-		private var _mapBlockList:Vector.<MapBlock>;
+		private var _mapBlockList:Vector.<MapBlockView>;
 //		private var _tileMapBlockList:Vector.<TileMapBlock>;;
 		
 		public function MapMgr()
 		{
 			super();
-			_mapBlockList = new Vector.<MapBlock>(2);
+			_mapBlockList = new Vector.<MapBlockView>(2);
 //			_tileMapBlockList = new Vector.<TileMapBlock>(2);
 		}
 		
@@ -34,7 +34,7 @@ package game.core.managers
 			MapLoader.load( func );
 		}
 		
-		public function getMapBlock( type:int, x:int, y:int ):MapBlock
+		public function getMapBlock( type:int, x:int, y:int ):MapBlockView
 		{
 			if( _mapBlockList[type] == null )
 			{
@@ -60,7 +60,6 @@ package game.core.managers
 		 */		
 		private function makeMapBlock( type:int, x:int, y:int ):void
 		{
-			
 			var s:Shape = new Shape();
 			s.graphics.beginFill( type > 0?0x000000:0xffffff );
 			s.graphics.lineStyle(1,0xcccccc)
@@ -75,7 +74,7 @@ package game.core.managers
 			
 			var mTexture:Texture = Texture.fromBitmapData(bd, false, false);
 			
-			_mapBlockList[type] = new MapBlock( type, x, y, mTexture);
+			_mapBlockList[type] = new MapBlockView( type, x, y, mTexture);
 		}
 		
 //		private function makeTileMapBlock(type:int, x:int, y:int):void

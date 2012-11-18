@@ -2,14 +2,10 @@ package game.starling
 {
 	import common.base.views.starling.BaseView;
 	
-	import flash.display.DisplayObject;
-	
-	import game.app.managers.KeyBoardMgr;
-	import game.core.interfaces.IMapView;
-	import game.core.map.Map;
+	import game.core.interfaces.view.IMapView;
+	import game.core.map.MapView;
 	import game.core.unit.CharacterUint;
 	import game.core.unit.EnemyUnit;
-	import game.core.unit.TileCharacterUnit;
 	import game.untils.MgrObjects;
 	
 	import starling.core.Starling;
@@ -80,7 +76,8 @@ package game.starling
 			var strMapData:Object = str;
 			if(GAME_MODE == 1)
 			{
-				_map = new Map();
+				_map = new MapView( strMapData["mapdata"] );
+				_map.init();
 			}
 			else if(GAME_MODE == 2)
 			{
@@ -89,7 +86,6 @@ package game.starling
 			} 
 			
 			stage.addChild( _map as BaseView );
-			_map.init( strMapData["mapdata"] );
 			
 			if(GAME_MODE == 1)
 			{

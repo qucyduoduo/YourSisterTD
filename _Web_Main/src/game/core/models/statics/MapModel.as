@@ -1,12 +1,13 @@
 package  game.core.models.statics
 {
-	import game.core.interfaces.IMapModel;
+	import game.core.interfaces.model.IMapModel;
+	import game.base.models.StaticUnitModel;
 
 	/**
 	 * 2D地图模型
 	 * @author noah
 	 */	
-	public class MapModel extends StaticObjectModel implements IMapModel
+	public class MapModel extends StaticUnitModel implements IMapModel
 	{
 		public static const MAP_WIDTH:int = 30;
 		public static const MAP_HEIGHT:int = 20;

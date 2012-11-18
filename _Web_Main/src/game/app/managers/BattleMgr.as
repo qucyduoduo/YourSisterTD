@@ -1,11 +1,11 @@
 package game.app.managers
 {
 	import common.base.managers.BaseMgr;
-	import common.utils.QuadNode;
-	import common.utils.interfaces.INode;
+	import game.untils.QuadNode;
+	import game.core.interfaces.INode;
 	
-	import game.core.interfaces.IMapView;
-	import game.core.interfaces.IPeopleModel;
+	import game.core.interfaces.view.IMapView;
+	import game.core.interfaces.model.ICharacterModel;
 	
 	import starling.events.Event;
 
@@ -46,7 +46,7 @@ package game.app.managers
 		 * @param p
 		 * @param map
 		 */		
-		public function attack( p:IPeopleModel, map:IMapView ):void{
+		public function attack( p:ICharacterModel, map:IMapView ):void{
 			
 //			var tempDir:uint = p.dir % 8;
 //			if(tempDir == 0){
@@ -73,7 +73,7 @@ package game.app.managers
 		 * @param p
 		 * @param map
 		 */		
-		public function cast( p:IPeopleModel, map:IMapView ):void{
+		public function cast( p:ICharacterModel, map:IMapView ):void{
 			
 //			return;
 //			
@@ -124,9 +124,9 @@ package game.app.managers
 //			}
 		}
 		
-		private var peopleModel:IPeopleModel;
+		private var peopleModel:ICharacterModel;
 		
-		private function showBlocks( p:IPeopleModel, map:IMapView ):void {
+		private function showBlocks( p:ICharacterModel, map:IMapView ):void {
 			/*
 			-1,-1 0,-1 1,-1
 			-1,0  0,0  1,0

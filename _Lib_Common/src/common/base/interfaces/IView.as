@@ -8,10 +8,7 @@ package common.base.interfaces
 	 */	
 	public interface IView
 	{
-		function setup():void;
-		function init(data:Object=null):void;
-		function show():void;
-		function hide():void;
+		function init():void;
 		function destroy():void;
 	}
 }

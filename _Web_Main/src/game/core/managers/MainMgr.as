@@ -28,7 +28,7 @@ package game.core.managers
 		{
 			if (_instance == null)
 			{
-				_instance = new MainMgr ();    
+				_instance = new MainMgr();    
 			}
 			return _instance;
 		}

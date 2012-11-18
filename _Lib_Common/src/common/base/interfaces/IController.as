@@ -8,6 +8,6 @@ package common.base.interfaces
 	 */	
 	public interface IController
 	{
-		function init( dataObj:Object ):void;
+		function init( model:IModel ):void;
 	}
 }

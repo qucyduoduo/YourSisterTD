@@ -1,19 +1,12 @@
 package  game.core.statics
 {
-	import game.base.controllers.ObjectController;
-	import game.core.models.statics.BlockModel;
+	import game.base.controllers.GameUnitController;
 
-	public class BlockController extends ObjectController
+	public class BlockController extends GameUnitController
 	{
-		private var _model:BlockModel;
-		
 		public function BlockController()
 		{
 			
-		}
-		
-		override public function init( dataObj:Object ):void{
-			_model = dataObj as BlockModel;
 		}
 	}
 }

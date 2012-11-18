@@ -8,6 +8,13 @@ package common.base.interfaces
 	 */	
 	public interface IModel
 	{
+		function update():void;
+		function dispose():void;
 		
+		function get x():Number;
+		function set x(value:Number):void;
+		
+		function get y():Number;
+		function set y(value:Number):void;
 	}
 }

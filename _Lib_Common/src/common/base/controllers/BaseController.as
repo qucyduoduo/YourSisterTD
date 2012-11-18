@@ -1,6 +1,7 @@
 package common.base.controllers
 {
 	import common.base.interfaces.IController;
+	import common.base.interfaces.IModel;
 	
 	/**
 	 * 控制类的基类
@@ -10,14 +11,16 @@ package common.base.controllers
 	 */	
 	public class BaseController implements IController
 	{
+		protected var _model:IModel;
+		
 		public function BaseController()
 		{
 
 		}
 		
-		public function init( dataObj:Object ):void
+		public function init( model:IModel ):void
 		{
-			
+			_model = model;
 		}
 	}
 }
