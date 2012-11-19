@@ -8,7 +8,7 @@ package
 	
 	import game.core.managers.MainMgr;
 	
-	[SWF(width="960", height="640", frameRate="60",backgroundColor="0x000000")]
+	[SWF(width="960", height="640", frameRate="30",backgroundColor="0x000000")]
 	public class _Web_Main extends Sprite
 	{
 		public function _Web_Main()

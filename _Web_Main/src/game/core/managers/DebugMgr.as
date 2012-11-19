@@ -22,7 +22,6 @@ package  game.core.managers
 	 */    
 	public class DebugMgr extends Debugger implements IMgr
 	{
-		
 		public const INFO:int = 1;
 		public const ERROR:int = 2;
 		public const DEBUG:int = 3;
@@ -64,14 +63,14 @@ package  game.core.managers
 			_debugInfo.defaultTextFormat = new TextFormat("arial", 12, 0xffffff, null,null,null,null,null,TextFormatAlign.LEFT,0,0,0,6);
 			_debugInfo.filters = [new DropShadowFilter(0,0,0,1,2,2,8)]
 			_debugInfo.width = 450;
-			_debugInfo.height = 595;
-			_debugInfo.y = 55;
+			_debugInfo.height = 576;
+			_debugInfo.y = 35;
 			_debugInfo.wordWrap = true;
 			_debugInfo.multiline = true;
 			
 			_debugInfoBg = new Shape();
 			_debugInfoBg.graphics.beginFill(0,.5);
-			_debugInfoBg.graphics.drawRect(0,30,450,620);
+			_debugInfoBg.graphics.drawRect(0,30,450,576);
 			_debugInfoBg.graphics.endFill();
 			
 			_outputArea.addChild(_debugInfoBg);

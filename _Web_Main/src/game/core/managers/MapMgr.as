@@ -61,8 +61,8 @@ package game.core.managers
 		private function makeMapBlock( type:int, x:int, y:int ):void
 		{
 			var s:Shape = new Shape();
-			s.graphics.beginFill( type > 0?0x000000:0xffffff );
-			s.graphics.lineStyle(1,0xcccccc)
+			s.graphics.beginFill( type > 0?0x333333:0x999999 );
+			s.graphics.lineStyle( 0.1, 0x333333)
 			s.graphics.lineTo( 0 , 0  );
 			s.graphics.lineTo( MapModel.BLOCK_WIDTH, 0 );
 			s.graphics.lineTo( MapModel.BLOCK_WIDTH  , MapModel.BLOCK_WIDTH );

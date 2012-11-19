@@ -68,8 +68,8 @@ package game.starling
 			MgrObjects.mapMgr.loadMap( onMapJsonLoadCompleteHandler );
 		}
 		
-		private function onMapJsonLoadCompleteHandler( str:Object ):void{
-			
+		private function onMapJsonLoadCompleteHandler( str:Object ):void
+		{
 			//1 平面 ，2斜角
 			GAME_MODE = 1;
 			
@@ -85,7 +85,7 @@ package game.starling
 				return;
 			} 
 			
-			stage.addChild( _map as BaseView );
+			addChild( _map as BaseView );
 			
 			if(GAME_MODE == 1)
 			{
