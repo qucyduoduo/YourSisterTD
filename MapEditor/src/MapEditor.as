@@ -1,23 +1,32 @@
 package
 {
+	import com.bit101.components.Style;
+	
+	import data.MapData;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.events.NativeWindowBoundsEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.net.FileFilter;
 	import flash.utils.ByteArray;
-	import flash.utils.CompressionAlgorithm;
 	import flash.utils.setTimeout;
 	
-	[SWF(width="960", height="640", frameRate="30",backgroundColor="0x000000")]
+	import panel.ControlsPanel;
+	import panel.MapPanel;
+	
+	[SWF(width="800", height="405", frameRate="30",backgroundColor="0x000000")]
 	public class MapEditor extends Sprite
 	{
 		private var _currentFile:File;
 		private var _mapData:MapData;
 		private var _saveCount:int;
+		private var _controlsPanel:ControlsPanel;
+		private var _mapPanel:MapPanel;
 		
 		public function MapEditor()
 		{
@@ -33,9 +42,18 @@ package
 			else addEventListener(Event.ADDED_TO_STAGE,initialize);
 		}
 		
-		protected function initialize():void
+		private function initialize():void
 		{
+			Style.fontName = "arial";
+			Style.embedFonts = false;
+			Style.fontSize = 12;
+			Style.setStyle(Style.LIGHT);
+			
 			initMenus();
+			initPanels();
+			initPanelsEvent();
+			
+			stage.nativeWindow.addEventListener(Event.RESIZE, onResizeHandle);
 		}
 		
 		private function initMenus():void
@@ -47,7 +65,41 @@ package
 			stage.nativeWindow..menu = editorMenu;
 		}
 		
-		protected function menuEventHandler(e:Event):void
+		private function initPanels():void
+		{
+			_controlsPanel = new ControlsPanel( this, 0, 0 );
+			_mapPanel = new MapPanel( this, 0, 0 );
+			onResizeHandle();
+		}
+		
+		private function onResizeHandle(e:NativeWindowBoundsEvent = null):void
+		{
+			var w:int = stage.stageWidth;
+			var h:int = stage.stageHeight;
+			
+			_controlsPanel.setSize( 180, stage.stageHeight );
+			_mapPanel.x = 220;
+			_mapPanel.setSize( 960 * 0.6, 640 * 0.6 );
+			trace( stage.stageWidth, stage.stageHeight );
+		}
+		
+		private function initPanelsEvent():void
+		{
+			_controlsPanel.addEventListener( "addWalk" , onAddWalkHandler );	
+			_controlsPanel.addEventListener( "addBlock" , onAddBlockHandler );	
+		}
+		
+		private function onAddBlockHandler(e:Event):void
+		{
+			_mapPanel.addType = 1;
+		}
+		
+		private function onAddWalkHandler(e:Event):void
+		{
+			_mapPanel.addType = 0;
+		}
+		
+		private function menuEventHandler(e:Event):void
 		{
 			switch(e.type)
 			{
@@ -68,7 +120,29 @@ package
 				}
 			}
 		}
-		
+		/**
+		 * 新建地图
+		 */		
+		private function onNewHandler():void
+		{
+			_mapData = new MapData();
+			var bytes:ByteArray = _mapData.toByteArray();
+			_currentFile = new File();
+			_currentFile.addEventListener(Event.COMPLETE, onSaved ,false,0,true);
+			_currentFile.save( bytes, "未命名_"+ _saveCount++ + ".map");
+		}
+		/**
+		 *打开地图 
+		 */		
+		private function onOpenHandler():void
+		{
+			_currentFile = new File();
+			_currentFile.addEventListener(Event.SELECT, onOpened,false,0, true);
+			_currentFile.browseForOpen("打开文件",[new FileFilter("地图文件","*.map")]);
+		}
+		/**
+		 * 保存地图
+		 */		
 		private function onSaveHandler():void
 		{
 			var bytes:ByteArray = _mapData.toByteArray();
@@ -79,24 +153,10 @@ package
 			fs.writeBytes( bytes );
 			fs.close();
 		}
-		
-		private function onOpenHandler():void
-		{
-			_currentFile = new File();
-			_currentFile.addEventListener(Event.SELECT, onOpened,false,0, true);
-			_currentFile.browseForOpen("打开文件",[new FileFilter("地图文件","*.map")]);
-		}
-		
-		private function onNewHandler():void
-		{
-			_mapData = new MapData();
-			var bytes:ByteArray = _mapData.toByteArray();
-			_currentFile = new File();
-			_currentFile.addEventListener(Event.COMPLETE, onSaved ,false,0,true);
-			_currentFile.save( bytes, "未命名_"+ _saveCount++ + ".map");
-		}
-		
-		protected function onOpened(e:Event):void
+		/**
+		 * 读取打开的地图
+		 */		
+		private function onOpened(e:Event):void
 		{
 			var fs:FileStream = new FileStream();
 			fs.open(_currentFile, FileMode.READ);
@@ -106,11 +166,15 @@ package
 			fs.readBytes(data);
 			_mapData = new MapData();
 			_mapData.fromByteArray( data );
-		}
-		
-		protected function onSaved(e:Event):void
-		{
 			
+			_mapPanel.setData( _mapData );
+		}
+		/**
+		 * 刷新地图视图
+		 */		
+		private function onSaved(e:Event):void
+		{
+			_mapPanel.setData( _mapData );
 		}
 	}
 }
