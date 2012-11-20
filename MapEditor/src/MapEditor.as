@@ -12,6 +12,7 @@ package
 	import flash.utils.CompressionAlgorithm;
 	import flash.utils.setTimeout;
 	
+	[SWF(width="960", height="640", frameRate="30",backgroundColor="0x000000")]
 	public class MapEditor extends Sprite
 	{
 		private var _currentFile:File;
