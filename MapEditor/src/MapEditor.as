@@ -4,10 +4,20 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	import flash.net.FileFilter;
+	import flash.utils.ByteArray;
+	import flash.utils.CompressionAlgorithm;
 	import flash.utils.setTimeout;
 	
 	public class MapEditor extends Sprite
 	{
+		private var _currentFile:File;
+		private var _mapData:MapData;
+		private var _saveCount:int;
+		
 		public function MapEditor()
 		{
 			stage.align = StageAlign.TOP_LEFT;
@@ -60,15 +70,44 @@ package
 		
 		private function onSaveHandler():void
 		{
-			
+			var bytes:ByteArray = _mapData.toByteArray();
+			var fs:FileStream = new FileStream();
+			fs.open(_currentFile, FileMode.WRITE);
+			fs.position = 0;
+			fs.truncate();
+			fs.writeBytes( bytes );
+			fs.close();
 		}
 		
 		private function onOpenHandler():void
 		{
-			
+			_currentFile = new File();
+			_currentFile.addEventListener(Event.SELECT, onOpened,false,0, true);
+			_currentFile.browseForOpen("打开文件",[new FileFilter("地图文件","*.map")]);
 		}
 		
 		private function onNewHandler():void
+		{
+			_mapData = new MapData();
+			var bytes:ByteArray = _mapData.toByteArray();
+			_currentFile = new File();
+			_currentFile.addEventListener(Event.COMPLETE, onSaved ,false,0,true);
+			_currentFile.save( bytes, "未命名_"+ _saveCount++ + ".map");
+		}
+		
+		protected function onOpened(e:Event):void
+		{
+			var fs:FileStream = new FileStream();
+			fs.open(_currentFile, FileMode.READ);
+			
+			var data:ByteArray = new ByteArray();
+			fs.position = 0;
+			fs.readBytes(data);
+			_mapData = new MapData();
+			_mapData.fromByteArray( data );
+		}
+		
+		protected function onSaved(e:Event):void
 		{
 			
 		}
