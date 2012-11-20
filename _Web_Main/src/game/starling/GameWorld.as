@@ -3,6 +3,7 @@ package game.starling
 	import common.base.views.starling.BaseView;
 	
 	import game.core.interfaces.view.IMapView;
+	import game.core.managers.MainMgr;
 	import game.core.map.MapView;
 	import game.core.unit.CharacterUint;
 	import game.core.unit.EnemyUnit;
@@ -64,12 +65,15 @@ package game.starling
 			stage.addEventListener(TouchEvent.TOUCH, onTouch);
 			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
 			
+			MgrObjects.debugMgr.log( "初始化耗时: " + MainMgr.instance.endTimeCount() );
+			
 //			MgrObjects.uiMgr.init(();
 			MgrObjects.mapMgr.loadMap( onMapJsonLoadCompleteHandler );
 		}
 		
 		private function onMapJsonLoadCompleteHandler( str:Object ):void
 		{
+			MgrObjects.debugMgr.log( "地图加载耗时: " + MainMgr.instance.endTimeCount() );
 			//1 平面 ，2斜角
 			GAME_MODE = 1;
 			
@@ -78,6 +82,7 @@ package game.starling
 			{
 				_map = new MapView( strMapData["mapdata"] );
 				_map.init();
+				MgrObjects.debugMgr.log( "初始化地图耗时: " + MainMgr.instance.endTimeCount() );
 			}
 			else if(GAME_MODE == 2)
 			{

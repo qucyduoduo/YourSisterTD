@@ -6,6 +6,7 @@ package game.core.managers
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	
 	import game.starling.GameWorld;
 	import game.untils.MgrObjects;
@@ -39,6 +40,20 @@ package game.core.managers
 		{
 			super();
 		}
+		
+		private var _startTime:uint;
+		
+		public function startTimeCount():void
+		{
+			_startTime = getTimer();
+		}
+		
+		public function endTimeCount():String
+		{
+			var returnTime:uint = getTimer() - _startTime;
+			startTimeCount();
+			return returnTime + " ms";
+		}
 		/**
 		 * initialization engine
 		 * @param _root
@@ -46,6 +61,8 @@ package game.core.managers
 		 */
 		public function init(_root:Sprite, debugMode:Boolean ):void
 		{
+			startTimeCount();
+			
 			_debugMode = debugMode;
 
 			addManagers();
